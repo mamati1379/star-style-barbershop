@@ -108,7 +108,7 @@ function generateTrackingCode(): string {
 // Admin Login
 app.post("/api/admin/login", (req, res) => {
   const { password } = req.body;
-  const masterPassword = process.env.ADMIN_PASSWORD || "admin123";
+  const masterPassword = process.env.ADMIN_PASSWORD || "Farhad2020";
   
   if (password === masterPassword) {
     res.json({ success: true, token: masterPassword });
