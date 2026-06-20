@@ -710,7 +710,8 @@ export default function App() {
                         </div>
                       </div>
                       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white italic">
-                        تیپت رو استار کن استایل رویایی تو <span className="text-amber-500">انتخاب کن</span>
+                        آرایشگاه استار استایل
+ شمارو به زیبایی<span className="text-amber-500">دعوت میکن</span>
                       </h2>
                       <p className="text-zinc-350 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4">
                         بارکد آسانسور مجتمع تجاری استارمال را اسکن کردید؟ سالن آرایش و استایل مردانه با خدمات لوکس و مدرن در <span className="text-amber-400 font-extrabold underline decoration-amber-500/40 underline-offset-4">طبقه ششم مجتمع استارمال</span> منتظر شما است. کافی‌ست در فرم زیر ثبت‌نام کرده و بلیت VIP دیجیتال خود را بلافاصله دریافت نمایید!
