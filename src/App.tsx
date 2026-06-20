@@ -711,7 +711,7 @@ export default function App() {
                       <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                         <div className="inline-flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 px-3.5 py-1.5 rounded-full text-amber-400 text-[10px] sm:text-xs font-bold tracking-widest leading-none">
                           <Sparkles size={11} className="animate-pulse text-amber-550" />
-                          کمپین ویژه آسانسور
+                          کمپین ویژه استار استایل
                         </div>
                         <div className="inline-flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-3.5 py-1.5 rounded-full text-zinc-300 text-[10px] sm:text-xs font-bold">
                           <span className="inline-block w-1.5 h-1.5 bg-amber-500 rounded-full animate-ping"></span>
