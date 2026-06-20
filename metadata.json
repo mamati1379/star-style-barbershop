@@ -1,0 +1,6 @@
+{
+  "name": "Star Style Barbershop",
+  "description": "Star Style Gents Barbershop - elevator campaign registration and VIP ticket showcase",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
