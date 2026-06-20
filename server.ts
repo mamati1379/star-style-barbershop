@@ -9,6 +9,8 @@ dotenv.config();
 
 const app = express();
 const PORT = 3000;
+const DEFAULT_ADMIN_PASSWORD = "Farhad2020";
+const VALID_GIFTS = new Set(["blow-dry", "beard-fade", "credit-99k"]);
 
 app.use(express.json());
 
@@ -108,7 +110,7 @@ function generateTrackingCode(): string {
 // Admin Login
 app.post("/api/admin/login", (req, res) => {
   const { password } = req.body;
-  const masterPassword = process.env.ADMIN_PASSWORD || "Farhad2020";
+  const masterPassword = DEFAULT_ADMIN_PASSWORD;
   
   if (password === masterPassword) {
     res.json({ success: true, token: masterPassword });
@@ -120,7 +122,7 @@ app.post("/api/admin/login", (req, res) => {
 // Admin Authorization Middleware
 const authorizeAdmin = (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const token = req.headers["x-admin-password"] as string || req.query.password as string;
-  const masterPassword = process.env.ADMIN_PASSWORD || "admin123";
+  const masterPassword = DEFAULT_ADMIN_PASSWORD;
   
   if (token === masterPassword) {
     next();
@@ -143,6 +145,10 @@ app.post("/api/register", (req, res) => {
 
   if (!isValidIranMobile(mobile)) {
     return res.status(400).json({ error: "فرمت شماره موبایل نامعتبر است. نمونه صحیح: 09123456789" });
+  }
+
+  if (!VALID_GIFTS.has(gift)) {
+    return res.status(400).json({ error: "هدیه انتخابی نامعتبر است" });
   }
 
   const normalized = normalizeMobile(mobile);

@@ -69,8 +69,14 @@ export default function App() {
   useEffect(() => {
     const savedToken = localStorage.getItem("star_admin_token");
     if (savedToken) {
-      setIsAdminLoggedIn(true);
-      fetchClients(savedToken);
+      fetchClients(savedToken).then((isValid) => {
+        if (isValid) {
+          setIsAdminLoggedIn(true);
+        } else {
+          localStorage.removeItem("star_admin_token");
+          setIsAdminLoggedIn(false);
+        }
+      });
     }
   }, []);
 
@@ -103,9 +109,9 @@ export default function App() {
     setClients([]);
   };
 
-  const fetchClients = async (token?: string) => {
+  const fetchClients = async (token?: string): Promise<boolean> => {
     const activeToken = token || localStorage.getItem("star_admin_token");
-    if (!activeToken) return;
+    if (!activeToken) return false;
     
     setIsLoadingClients(true);
     try {
@@ -115,9 +121,12 @@ export default function App() {
       const data = await resp.json();
       if (resp.ok && data.success) {
         setClients(data.clients);
+        return true;
       }
+      return false;
     } catch (err) {
       console.error("Error fetching clients:", err);
+      return false;
     } finally {
       setIsLoadingClients(false);
     }
