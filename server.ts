@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const HOST = process.env.HOST || "127.0.0.1";
-const DEFAULT_ADMIN_PASSWORD = "Farhad2020";
+const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Farhad2020";
 const VALID_GIFTS = new Set(["blow-dry", "beard-fade", "credit-99k"]);
 
 app.use(express.json());
@@ -64,9 +64,31 @@ function saveClients(clients: Client[]) {
 
 // Mobile normalization helpers
 function persianToEnglishDigits(str: string): string {
-  const persianDigits = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
-  const arabicChars = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g];
-  
+  const persianDigits = [
+    /۰/g,
+    /۱/g,
+    /۲/g,
+    /۳/g,
+    /۴/g,
+    /۵/g,
+    /۶/g,
+    /۷/g,
+    /۸/g,
+    /۹/g,
+  ];
+  const arabicChars = [
+    /٠/g,
+    /١/g,
+    /٢/g,
+    /٣/g,
+    /٤/g,
+    /٥/g,
+    /٦/g,
+    /٧/g,
+    /٨/g,
+    /٩/g,
+  ];
+
   let result = str;
   for (let i = 0; i < 10; i++) {
     result = result.replace(persianDigits[i], i.toString());
@@ -79,17 +101,17 @@ function persianToEnglishDigits(str: string): string {
 
 function normalizeMobile(mobile: string): string {
   let cleaned = persianToEnglishDigits(mobile).replace(/\D/g, ""); // Remove non-digits
-  
+
   if (cleaned.startsWith("0098")) {
     cleaned = "0" + cleaned.slice(4);
   } else if (cleaned.startsWith("98") && cleaned.length > 10) {
     cleaned = "0" + cleaned.slice(2);
   }
-  
+
   if (cleaned.length === 10 && cleaned.startsWith("9")) {
     cleaned = "0" + cleaned;
   }
-  
+
   return cleaned;
 }
 
@@ -112,19 +134,27 @@ function generateTrackingCode(): string {
 app.post("/api/admin/login", (req, res) => {
   const { password } = req.body;
   const masterPassword = DEFAULT_ADMIN_PASSWORD;
-  
+
   if (password === masterPassword) {
     res.json({ success: true, token: masterPassword });
   } else {
-    res.status(401).json({ success: false, error: "رمز عبور مدیریت نادرست است" });
+    res
+      .status(401)
+      .json({ success: false, error: "رمز عبور مدیریت نادرست است" });
   }
 });
 
 // Admin Authorization Middleware
-const authorizeAdmin = (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  const token = req.headers["x-admin-password"] as string || req.query.password as string;
+const authorizeAdmin = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  const token =
+    (req.headers["x-admin-password"] as string) ||
+    (req.query.password as string);
   const masterPassword = DEFAULT_ADMIN_PASSWORD;
-  
+
   if (token === masterPassword) {
     next();
   } else {
@@ -137,15 +167,23 @@ app.post("/api/register", (req, res) => {
   const { fullName, mobile, gift } = req.body;
 
   if (!fullName || !fullName.trim()) {
-    return res.status(400).json({ error: "لطفاً نام و نام خانوادگی خود را وارد کنید" });
+    return res
+      .status(400)
+      .json({ error: "لطفاً نام و نام خانوادگی خود را وارد کنید" });
   }
 
   if (!mobile || !mobile.trim()) {
-    return res.status(400).json({ error: "لطفاً شماره موبایل خود را وارد کنید" });
+    return res
+      .status(400)
+      .json({ error: "لطفاً شماره موبایل خود را وارد کنید" });
   }
 
   if (!isValidIranMobile(mobile)) {
-    return res.status(400).json({ error: "فرمت شماره موبایل نامعتبر است. نمونه صحیح: 09123456789" });
+    return res
+      .status(400)
+      .json({
+        error: "فرمت شماره موبایل نامعتبر است. نمونه صحیح: 09123456789",
+      });
   }
 
   if (!VALID_GIFTS.has(gift)) {
@@ -156,14 +194,16 @@ app.post("/api/register", (req, res) => {
   const clients = getClients();
 
   // Check uniqueness of normalized mobile number
-  const isDuplicate = clients.some(c => c.normalizedMobile === normalized);
+  const isDuplicate = clients.some((c) => c.normalizedMobile === normalized);
   if (isDuplicate) {
-    return res.status(400).json({ error: "این شماره موبایل قبلاً ثبت شده است." });
+    return res
+      .status(400)
+      .json({ error: "این شماره موبایل قبلاً ثبت شده است." });
   }
 
   // Generate unique tracking code
   let trackingCode = generateTrackingCode();
-  while (clients.some(c => c.trackingCode === trackingCode)) {
+  while (clients.some((c) => c.trackingCode === trackingCode)) {
     trackingCode = generateTrackingCode();
   }
 
@@ -175,7 +215,7 @@ app.post("/api/register", (req, res) => {
     gift,
     trackingCode,
     createdAt: new Date().toISOString(),
-    status: "registered"
+    status: "registered",
   };
 
   clients.push(newClient);
@@ -188,7 +228,9 @@ app.post("/api/register", (req, res) => {
 app.get("/api/clients", authorizeAdmin, (req, res) => {
   const clients = getClients();
   // Sort from newest to oldest
-  const sortedClients = [...clients].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  const sortedClients = [...clients].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
   res.json({ success: true, clients: sortedClients });
 });
 
@@ -202,7 +244,7 @@ app.post("/api/clients/:id/status", authorizeAdmin, (req, res) => {
   }
 
   const clients = getClients();
-  const index = clients.findIndex(c => c.id === id);
+  const index = clients.findIndex((c) => c.id === id);
 
   if (index === -1) {
     return res.status(404).json({ error: "کاربر یافت نشد" });
