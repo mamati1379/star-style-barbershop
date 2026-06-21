@@ -224,7 +224,7 @@ export default function App() {
 
   const handleShareWhatsApp = (client: Client) => {
     const giftTitle = GIFT_OPTIONS.find(g => g.id === client.gift)?.title || client.gift;
-    const shareText = `سلاام! من در طرح لندینگ آسانسور سالن استار استایل (فرهاد) ثبت‌نام کردم و هدیه فوق‌العاده "${giftTitle}" را برنده شدم!\nکد پیگیری من: ${client.trackingCode}\nشما هم اسکن کنید و هدیه اختصاصی بگیرید!`;
+    const shareText = `سلاام! من در طرح لندینگ  سالن استار استایل (فرهاد) ثبت‌نام کردم و هدیه فوق‌العاده "${giftTitle}" را برنده شدم!\nکد پیگیری من: ${client.trackingCode}\nشما هم اسکن کنید و هدیه اختصاصی بگیرید!`;
     const encodedText = encodeURIComponent(shareText);
     window.open(`https://api.whatsapp.com/send?text=${encodedText}`, "_blank");
   };
@@ -745,8 +745,12 @@ export default function App() {
  شمارو به زیبایی <span className="text-amber-500">دعوت میکند</span>
                       </h2>
                       <p className={themeClass("text-zinc-700 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4", "text-zinc-350 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4")}>
-                        بارکد آسانسور مجتمع تجاری استارمال را اسکن کردید؟ سالن آرایش و استایل مردانه با خدمات لوکس و مدرن در <span className="text-amber-400 font-extrabold underline decoration-amber-500/40 underline-offset-4">طبقه ششم مجتمع استارمال</span> منتظر شما است. کافی‌ست در فرم زیر ثبت‌نام کرده و بلیت VIP دیجیتال خود را بلافاصله دریافت نمایید!
+                        بارکد  مجتمع تجاری استارمال را اسکن کردید؟ سالن آرایش و استایل مردانه با خدمات لوکس و مدرن در <span className="text-amber-400 font-extrabold underline decoration-amber-500/40 underline-offset-4">طبقه ششم مجتمع استارمال</span> منتظر شما است. کافی‌ست در فرم زیر ثبت‌نام کرده و بلیت VIP دیجیتال خود را بلافاصله دریافت نمایید!
                       </p>
+                      <p className={themeClass("text-zinc-700 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4", "text-zinc-350 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4")}>
+                       هدیه خودرا انتخاب کنید
+                       <span className="text-amber-400 font-extrabold underline decoration-amber-500/40 underline-offset-4"></span>                  </p>
+
                     </div>
 
                     <form
@@ -1085,7 +1089,7 @@ export default function App() {
       {/* Elegant Footer conforming to instructions */}
       <footer className={themeClass("mt-auto border-t border-zinc-200 bg-white/80 py-6 px-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4 z-10 font-medium", "mt-auto border-t border-zinc-900 bg-black/40 py-6 px-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4 z-10 font-medium")}>
         <p dir="ltr" className={themeClass("text-zinc-600", "text-zinc-500")}>© {toPersianDigits(1405)} Star Style Gents. All rights reserved.</p>
-        <p className={themeClass("text-zinc-700", "text-zinc-650")}>طراحی و توسعه لوکس ویژه کمپین مراجعین آسانسور استار استایل (فرهاد)</p>
+        <p className={themeClass("text-zinc-700", "text-zinc-650")}>طراحی و توسعه لوکس ویژه کمپین مراجعین جدید استار استایل (فرهاد)</p>
         <div className="flex gap-4">
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
