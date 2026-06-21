@@ -8,7 +8,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
+const HOST = process.env.HOST || "127.0.0.1";
 const DEFAULT_ADMIN_PASSWORD = "Farhad2020";
 const VALID_GIFTS = new Set(["blow-dry", "beard-fade", "credit-99k"]);
 
@@ -217,7 +218,11 @@ app.post("/api/clients/:id/status", authorizeAdmin, (req, res) => {
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: false,
+        host: HOST,
+      },
       appType: "spa",
     });
     app.use(vite.middlewares);
@@ -229,8 +234,8 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  app.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST}:${PORT}`);
   });
 }
 
