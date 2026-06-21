@@ -1,0 +1,91 @@
+/* IRANSansX Font Family - Custom Web Fonts */
+
+/* Thin - Weight 100 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-Thin.otf") format("opentype");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Ultra Light - Weight 200 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-UltraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Light - Weight 300 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Regular - Weight 400 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Medium - Weight 500 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-Medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* DemiBold - Weight 600 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-DemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Bold - Weight 700 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Extra Bold - Weight 800 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-ExtraBold.otf") format("opentype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Black - Weight 900 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-Black.otf") format("opentype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Heavy - Weight 900 */
+@font-face {
+    font-family: "IRANSansX";
+    src: url("/fonts/IRANSansX-Heavy.otf") format("opentype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}

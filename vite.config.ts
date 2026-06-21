@@ -1,11 +1,38 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
+import fs from "fs";
 import path from "path";
 import { defineConfig } from "vite";
 
+// Plugin to copy fonts to dist during build
+function copyFontsPlugin() {
+  return {
+    name: "copy-fonts",
+    apply: "build",
+    async generateBundle() {
+      const fontsDir = path.resolve(__dirname, "public/fonts");
+      const distFontsDir = path.resolve(__dirname, "dist/fonts");
+
+      // Create dist/fonts directory
+      if (!fs.existsSync(distFontsDir)) {
+        fs.mkdirSync(distFontsDir, { recursive: true });
+      }
+
+      // Copy all font files
+      const files = fs.readdirSync(fontsDir);
+      for (const file of files) {
+        const src = path.join(fontsDir, file);
+        const dest = path.join(distFontsDir, file);
+        fs.copyFileSync(src, dest);
+        console.log(`✓ Copied font: ${file}`);
+      }
+    },
+  };
+}
+
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), copyFontsPlugin()],
     base: "/star-style-barbershop/",
     resolve: {
       alias: {
