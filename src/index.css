@@ -1,8 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap");
+@import url("https://v1.fontapi.ir/css/IranSans:300,400,500,600,700,900");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-    --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Iran Sans", ui-sans-serif, system-ui, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
@@ -14,11 +15,13 @@ html {
 }
 
 body {
+    font-family: "Iran Sans", ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "kern" 1;
     -webkit-font-feature-settings: "kern" 1;
     letter-spacing: 0.4px;
     line-height: 1.6;
     word-spacing: 0.05em;
+    font-weight: 500;
 }
 
 /* Enhanced text rendering for Persian */
@@ -34,6 +37,19 @@ h5,
 h6 {
     letter-spacing: 0.3px;
     word-break: break-word;
+    font-family: "Iran Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Bold and strong elements */
+strong,
+b,
+.font-bold {
+    font-weight: 700;
+}
+
+.font-black,
+.font-extrabold {
+    font-weight: 900;
 }
 
 /* Better line height for better readability */

@@ -39,7 +39,7 @@ interface Client {
 }
 
 export default function App() {
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(true);
   // Navigation & Views
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
@@ -542,77 +542,137 @@ export default function App() {
 
                 {/* KPI Statistics Dashboard Cards */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                  <div className="bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between">
+                  <div
+                    className={themeClass(
+                      "bg-blue-50 p-4 sm:p-5 rounded-3xl border border-blue-200 backdrop-blur-sm flex flex-col justify-between",
+                      "bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between",
+                    )}
+                  >
                     <span
                       className={themeClass(
-                        "text-xs text-zinc-700 font-bold",
+                        "text-xs text-blue-900 font-bold",
                         "text-xs text-zinc-500 font-bold",
                       )}
                     >
                       کل مراجعین ثبت‌نامی
                     </span>
                     <div className="mt-3 flex items-baseline justify-between">
-                      <span className="text-2xl sm:text-3xl font-black text-white font-mono">
+                      <span
+                        className={themeClass(
+                          "text-2xl sm:text-3xl font-black text-blue-900 font-mono",
+                          "text-2xl sm:text-3xl font-black text-white font-mono",
+                        )}
+                      >
                         {toPersianDigits(stats.total)}
                       </span>
-                      <span className="text-[10px] bg-zinc-800 text-zinc-400 px-2.5 py-1 rounded-full font-bold">
+                      <span
+                        className={themeClass(
+                          "text-[10px] bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full font-bold",
+                          "text-[10px] bg-zinc-800 text-zinc-400 px-2.5 py-1 rounded-full font-bold",
+                        )}
+                      >
                         نفر
                       </span>
                     </div>
                   </div>
 
-                  <div className="bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between">
+                  <div
+                    className={themeClass(
+                      "bg-amber-50 p-4 sm:p-5 rounded-3xl border border-amber-200 backdrop-blur-sm flex flex-col justify-between",
+                      "bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between",
+                    )}
+                  >
                     <span
                       className={themeClass(
-                        "text-xs text-zinc-700 font-bold",
+                        "text-xs text-amber-900 font-bold",
                         "text-xs text-zinc-500 font-bold",
                       )}
                     >
                       وضعیت جدید (ثبت‌شده)
                     </span>
                     <div className="mt-3 flex items-baseline justify-between">
-                      <span className="text-2xl sm:text-3xl font-black text-blue-400 font-mono">
+                      <span
+                        className={themeClass(
+                          "text-2xl sm:text-3xl font-black text-amber-900 font-mono",
+                          "text-2xl sm:text-3xl font-black text-blue-400 font-mono",
+                        )}
+                      >
                         {toPersianDigits(stats.registered)}
                       </span>
-                      <span className="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-full font-bold">
+                      <span
+                        className={themeClass(
+                          "text-[10px] bg-amber-100 text-amber-700 border border-amber-200 px-2.5 py-1 rounded-full font-bold",
+                          "text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-full font-bold",
+                        )}
+                      >
                         در انتظار
                       </span>
                     </div>
                   </div>
 
-                  <div className="bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between">
+                  <div
+                    className={themeClass(
+                      "bg-purple-50 p-4 sm:p-5 rounded-3xl border border-purple-200 backdrop-blur-sm flex flex-col justify-between",
+                      "bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between",
+                    )}
+                  >
                     <span
                       className={themeClass(
-                        "text-xs text-zinc-700 font-bold",
+                        "text-xs text-purple-900 font-bold",
                         "text-xs text-zinc-500 font-bold",
                       )}
                     >
                       مراجعه کرده به سالن
                     </span>
                     <div className="mt-3 flex items-baseline justify-between">
-                      <span className="text-2xl sm:text-3xl font-black text-purple-400 font-mono">
+                      <span
+                        className={themeClass(
+                          "text-2xl sm:text-3xl font-black text-purple-900 font-mono",
+                          "text-2xl sm:text-3xl font-black text-purple-400 font-mono",
+                        )}
+                      >
                         {toPersianDigits(stats.visited)}
                       </span>
-                      <span className="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2.5 py-1 rounded-full font-bold">
+                      <span
+                        className={themeClass(
+                          "text-[10px] bg-purple-100 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-full font-bold",
+                          "text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2.5 py-1 rounded-full font-bold",
+                        )}
+                      >
                         مراجعه
                       </span>
                     </div>
                   </div>
 
-                  <div className="bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between">
+                  <div
+                    className={themeClass(
+                      "bg-emerald-50 p-4 sm:p-5 rounded-3xl border border-emerald-200 backdrop-blur-sm flex flex-col justify-between",
+                      "bg-zinc-900/30 p-4 sm:p-5 rounded-3xl border border-zinc-800/60 backdrop-blur-sm flex flex-col justify-between",
+                    )}
+                  >
                     <span
                       className={themeClass(
-                        "text-xs text-zinc-700 font-bold",
+                        "text-xs text-emerald-900 font-bold",
                         "text-xs text-zinc-500 font-bold",
                       )}
                     >
                       هدیه تحویل داده شده
                     </span>
                     <div className="mt-3 flex items-baseline justify-between">
-                      <span className="text-2xl sm:text-3xl font-black text-amber-500 font-mono">
+                      <span
+                        className={themeClass(
+                          "text-2xl sm:text-3xl font-black text-emerald-900 font-mono",
+                          "text-2xl sm:text-3xl font-black text-amber-500 font-mono",
+                        )}
+                      >
                         {toPersianDigits(stats.claimed)}
                       </span>
-                      <span className="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-1 rounded-full font-bold">
+                      <span
+                        className={themeClass(
+                          "text-[10px] bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-bold",
+                          "text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-1 rounded-full font-bold",
+                        )}
+                      >
                         تحویل شد
                       </span>
                     </div>
@@ -620,9 +680,19 @@ export default function App() {
                 </div>
 
                 {/* Filters & Dynamic List */}
-                <div className="bg-zinc-900/40 rounded-3xl border border-zinc-800/70 overflow-hidden backdrop-blur-sm">
+                <div
+                  className={themeClass(
+                    "bg-white rounded-3xl border border-gray-200 overflow-hidden backdrop-blur-sm",
+                    "bg-zinc-900/40 rounded-3xl border border-zinc-800/70 overflow-hidden backdrop-blur-sm",
+                  )}
+                >
                   {/* Search and Filters Header */}
-                  <div className="p-4 sm:p-6 border-b border-zinc-800/65 flex flex-col md:flex-row gap-4 justify-between items-center bg-zinc-950/20">
+                  <div
+                    className={themeClass(
+                      "p-4 sm:p-6 border-b border-gray-200 flex flex-col md:flex-row gap-4 justify-between items-center bg-gray-50",
+                      "p-4 sm:p-6 border-b border-zinc-800/65 flex flex-col md:flex-row gap-4 justify-between items-center bg-zinc-950/20",
+                    )}
+                  >
                     {/* Search Field */}
                     <div className="relative w-full md:w-80">
                       <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
@@ -633,7 +703,9 @@ export default function App() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="جستجو با نام، موبایل یا کد رهگیری..."
-                        className="w-full bg-zinc-950 border border-zinc-800/80 rounded-2xl pr-10 pl-4 py-2.5 text-xs focus:border-amber-500 outline-none transition-all placeholder:text-zinc-600 font-medium"
+                        className={themeClass(
+                          "w-full bg-white border border-gray-300 rounded-2xl pr-10 pl-4 py-2.5 text-xs focus:border-amber-500 outline-none transition-all placeholder:text-gray-400 font-medium text-gray-800",
+                          "w-full bg-zinc-950 border border-zinc-800/80 rounded-2xl pr-10 pl-4 py-2.5 text-xs focus:border-amber-500 outline-zinc-600 font-medium"
                       />
                     </div>
 
@@ -981,7 +1053,7 @@ export default function App() {
                           "text-2xl sm:text-4xl font-black text-amber-400 italic mb-6 tracking-tight",
                         )}
                       >
-                        🎁 هدیه‌ای را انتخاب کنید
+                        🎁 هدیه خود را انتخاب کنید
                       </h3>
                     </div>
 
@@ -1061,18 +1133,18 @@ export default function App() {
                       <div>
                         <label
                           className={themeClass(
-                            "block text-xs text-zinc-600 mb-2 mr-1 font-bold",
-                            "block text-xs text-zinc-400 mb-2 mr-1 font-bold",
+                            "block text-xs text-zinc-600 mb-4 mr-1 font-bold",
+                            "block text-xs text-zinc-400 mb-4 mr-1 font-bold",
                           )}
                         >
                           انتخاب هدیه خوش‌آمدگویی (یکی از موارد)
                         </label>
-                        <div className="space-y-2.5">
+                        <div className="space-y-3.5">
                           {GIFT_OPTIONS.map((option) => (
                             <label
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex items-start gap-3.5 p-3.5 rounded-2xl border cursor-pointer transition-all ${
+                              className={`flex flex-col gap-2 p-5 rounded-2xl border cursor-pointer transition-all ${
                                 selectedGift === option.id
                                   ? themeClass(
                                       "bg-amber-50 border-amber-400 text-zinc-900 shadow-[0_0_15px_rgba(245,158,11,0.08)]",
@@ -1084,42 +1156,44 @@ export default function App() {
                                     )
                               }`}
                             >
-                              <div className="mt-1 flex items-center justify-center">
-                                <input
-                                  type="radio"
-                                  name="gift"
-                                  checked={selectedGift === option.id}
-                                  onChange={() => setSelectedGift(option.id)}
-                                  className="accent-amber-500 w-4.5 h-4.5 cursor-pointer"
-                                />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-1.5">
-                                  {renderIcon(
-                                    option.iconName,
-                                    15,
-                                    selectedGift === option.id
-                                      ? isLightTheme
-                                        ? "text-amber-600"
-                                        : "text-amber-500"
-                                      : isLightTheme
-                                        ? "text-zinc-500"
-                                        : "text-zinc-500",
-                                  )}
-                                  <span
-                                    className={`text-xs sm:text-sm font-bold leading-none ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-800" : "text-zinc-350"}`}
-                                  >
-                                    {option.title}
-                                  </span>
+                              <div className="flex items-start gap-3.5">
+                                <div className="mt-0.5 flex items-center justify-center flex-shrink-0">
+                                  <input
+                                    type="radio"
+                                    name="gift"
+                                    checked={selectedGift === option.id}
+                                    onChange={() => setSelectedGift(option.id)}
+                                    className="accent-amber-500 w-5 h-5 cursor-pointer"
+                                  />
                                 </div>
-                                <p
-                                  className={themeClass(
-                                    "text-[11px] text-zinc-600 mt-1 leading-relaxed",
-                                    "text-[11px] text-zinc-500 mt-1 leading-relaxed",
-                                  )}
-                                >
-                                  {option.description}
-                                </p>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2">
+                                    {renderIcon(
+                                      option.iconName,
+                                      18,
+                                      selectedGift === option.id
+                                        ? isLightTheme
+                                          ? "text-amber-600"
+                                          : "text-amber-500"
+                                        : isLightTheme
+                                          ? "text-zinc-500"
+                                          : "text-zinc-500",
+                                    )}
+                                    <span
+                                      className={`text-sm sm:text-base font-bold leading-none ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-800" : "text-zinc-350"}`}
+                                    >
+                                      {option.title}
+                                    </span>
+                                  </div>
+                                  <p
+                                    className={themeClass(
+                                      "text-[12px] text-zinc-600 mt-2 leading-relaxed",
+                                      "text-[12px] text-zinc-500 mt-2 leading-relaxed",
+                                    )}
+                                  >
+                                    {option.description}
+                                  </p>
+                                </div>
                               </div>
                             </label>
                           ))}
@@ -1520,11 +1594,19 @@ export default function App() {
           "mt-auto border-t border-zinc-900 bg-black/40 py-6 px-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4 z-10 font-medium",
         )}
       >
-        <p dir="ltr" className={themeClass("text-zinc-600", "text-zinc-500")}>
-          © {toPersianDigits(1405)} Star Style Gents. All rights reserved.
+        <p className={themeClass("text-zinc-700", "text-zinc-450")}>
+          طراحی و توسعه توسط تیم یزدان سرور
         </p>
-        <p className={themeClass("text-zinc-700", "text-zinc-650")}>
-          طراحی و توسعه لوکس ویژه کمپین مراجعین جدید استار استایل (فرهاد)
+        <p className={themeClass("text-zinc-700", "text-zinc-450")}>
+          <a
+            href="tel:09122630557"
+            className="hover:text-amber-500 transition-colors font-bold"
+          >
+            ۰۹۱۲۲۶۳۰۵۵۷
+          </a>
+        </p>
+        <p className={themeClass("text-zinc-600", "text-zinc-450")}>
+          برای سفارش پروژه طراحی سایت یا اپ انلاین تماس بگیرید
         </p>
         <div className="flex gap-4">
           <span className="flex items-center gap-1.5">
