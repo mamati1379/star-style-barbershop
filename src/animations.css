@@ -1,0 +1,311 @@
+/* ============= BLINKING & GLOWING ANIMATIONS ============= */
+
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+    }
+}
+
+/* Intense Blink */
+@keyframes intenseBlink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Sparkle Animation for Icons */
+@keyframes sparkle {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Gentle Bounce */
+@keyframes bounce-gentle {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Rotate Spin for Icons */
+@keyframes rotateSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Rainbow Glow for Gift Icons */
+@keyframes rainbowGlow {
+    0% {
+        text-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+    }
+    25% {
+        text-shadow: 0 0 20px rgba(245, 158, 11, 1);
+    }
+    50% {
+        text-shadow: 0 0 10px rgba(251, 146, 60, 0.8);
+    }
+    75% {
+        text-shadow: 0 0 20px rgba(245, 158, 11, 1);
+    }
+    100% {
+        text-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+    }
+}
+
+/* Fade In Text */
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide In from Right */
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In from Left */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* ============= CLASS ANIMATIONS ============= */
+
+.animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+}
+
+.animate-intense-blink {
+    animation: intenseBlink 1.5s infinite;
+}
+
+.animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.animate-rotate-spin {
+    animation: rotateSpin 3s linear infinite;
+}
+
+.animate-rainbow-glow {
+    animation: rainbowGlow 2s ease-in-out infinite;
+}
+
+.animate-fade-in-text {
+    animation: fadeInText 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+/* ============= STAGGERED ANIMATIONS ============= */
+.stagger-1 {
+    animation-delay: 0.1s;
+}
+.stagger-2 {
+    animation-delay: 0.2s;
+}
+.stagger-3 {
+    animation-delay: 0.3s;
+}
+.stagger-4 {
+    animation-delay: 0.4s;
+}
+.stagger-5 {
+    animation-delay: 0.5s;
+}
+
+/* ============= HOVER EFFECTS ============= */
+.hover-scale-up:hover {
+    transform: scale(1.05);
+}
+.hover-scale-up {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale-up-more:hover {
+    transform: scale(1.1);
+}
+.hover-scale-up-more {
+    transition: transform 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+}
+.hover-glow {
+    transition: box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+.hover-lift {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* ============= LOGO ANIMATIONS ============= */
+.animate-logo-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-logo-glow {
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
+    animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* ============= GIFT CARD ANIMATIONS ============= */
+.gift-card-enter {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+.gift-card-hover {
+    transition: all 0.3s ease;
+}
+
+.gift-card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(245, 158, 11, 0.3);
+}
+
+/* ============= BUTTON ANIMATIONS ============= */
+.btn-pulse {
+    animation: pulseGlow 1.5s infinite;
+}
+
+.btn-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shine::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+/* ============= TEXT ANIMATIONS ============= */
+.text-shimmer {
+    background: linear-gradient(
+        90deg,
+        currentColor,
+        rgba(245, 158, 11, 0.6),
+        currentColor
+    );
+    background-size: 200% 200%;
+    animation: shimmer 3s infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============= ICON ANIMATIONS ============= */
+.icon-float {
+    animation: float 2.5s ease-in-out infinite;
+}
+
+.icon-spark {
+    animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.icon-rotate {
+    animation: rotateSpin 4s linear infinite;
+}
+
+/* ============= RESPONSIVE ANIMATIONS ============= */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

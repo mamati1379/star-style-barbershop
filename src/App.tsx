@@ -353,13 +353,13 @@ export default function App() {
           "sticky top-0 h-20 border-b border-zinc-900 flex items-center justify-between px-4 sm:px-12 backdrop-blur-md bg-black/40 z-50",
         )}
       >
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.3)]">
-            <span className="text-black font-black text-xl leading-none">
-              S
-            </span>
-          </div>
-          <div>
+        <div className="flex items-center gap-3 hover-lift">
+          <img
+            src="/logo.png"
+            alt="Star Style Logo"
+            className="w-12 h-12 animate-logo-float drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]"
+          />
+          <div className="animate-slide-in-left">
             <h1
               className={themeClass(
                 "text-lg sm:text-xl font-black bg-gradient-to-l from-zinc-950 via-zinc-700 to-zinc-400 bg-clip-text text-transparent",
@@ -368,8 +368,8 @@ export default function App() {
             >
               استار استایل (فرهاد)
             </h1>
-            <p className="text-[10px] text-amber-500/80 tracking-widest font-bold">
-              STAR STYLE VIP
+            <p className="text-[10px] text-amber-500/80 tracking-widest font-bold animate-intense-blink">
+              🌟 STAR STYLE VIP
             </p>
           </div>
         </div>
@@ -1082,8 +1082,8 @@ export default function App() {
                       ></p>
                       <h3
                         className={themeClass(
-                          "text-2xl sm:text-4xl font-black text-amber-600 italic mb-6 tracking-tight",
-                          "text-2xl sm:text-4xl font-black text-amber-400 italic mb-6 tracking-tight",
+                          "text-2xl sm:text-4xl font-black text-amber-600 italic mb-6 tracking-tight animate-fade-in-text stagger-1",
+                          "text-2xl sm:text-4xl font-black text-amber-400 italic mb-6 tracking-tight animate-fade-in-text stagger-1",
                         )}
                       >
                         🎁 هدیه خود را انتخاب کنید
@@ -1173,11 +1173,11 @@ export default function App() {
                           انتخاب هدیه خوش‌آمدگویی (یکی از موارد)
                         </label>
                         <div className="space-y-3.5">
-                          {GIFT_OPTIONS.map((option) => (
+                          {GIFT_OPTIONS.map((option, idx) => (
                             <label
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex flex-col gap-2 p-5 rounded-2xl border cursor-pointer transition-all ${
+                              className={`flex flex-col gap-2 p-5 rounded-2xl border cursor-pointer transition-all gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
                                       "bg-amber-50 border-amber-400 text-zinc-900 shadow-[0_0_15px_rgba(245,158,11,0.08)]",
@@ -1201,17 +1201,25 @@ export default function App() {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2">
-                                    {renderIcon(
-                                      option.iconName,
-                                      18,
-                                      selectedGift === option.id
-                                        ? isLightTheme
-                                          ? "text-amber-600"
-                                          : "text-amber-500"
-                                        : isLightTheme
-                                          ? "text-zinc-500"
-                                          : "text-zinc-500",
-                                    )}
+                                    <span
+                                      className={
+                                        selectedGift === option.id
+                                          ? "animate-sparkle"
+                                          : ""
+                                      }
+                                    >
+                                      {renderIcon(
+                                        option.iconName,
+                                        18,
+                                        selectedGift === option.id
+                                          ? isLightTheme
+                                            ? "text-amber-600"
+                                            : "text-amber-500"
+                                          : isLightTheme
+                                            ? "text-zinc-500"
+                                            : "text-zinc-500",
+                                      )}
+                                    </span>
                                     <span
                                       className={`text-sm sm:text-base font-bold leading-none ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-800" : "text-zinc-350"}`}
                                     >
@@ -1242,7 +1250,7 @@ export default function App() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-4 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-black text-sm rounded-xl shadow-[0_10px_35px_rgba(245,158,11,0.2)] hover:shadow-[0_10px_45px_rgba(245,158,11,0.4)] transition-all active:scale-[0.98] cursor-pointer"
+                        className="w-full py-4 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-black text-sm rounded-xl shadow-[0_10px_35px_rgba(245,158,11,0.2)] hover:shadow-[0_10px_45px_rgba(245,158,11,0.4)] transition-all active:scale-[0.98] cursor-pointer hover-lift btn-shine relative overflow-hidden group animate-fade-in-text"
                       >
                         {isSubmitting
                           ? "در حال ثبت اطلاعات گرانبهای شما..."
