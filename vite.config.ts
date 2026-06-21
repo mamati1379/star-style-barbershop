@@ -2,10 +2,10 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "fs";
 import path from "path";
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 
 // Plugin to copy fonts to dist during build
-function copyFontsPlugin() {
+function copyFontsPlugin(): Plugin {
   return {
     name: "copy-fonts",
     apply: "build",
