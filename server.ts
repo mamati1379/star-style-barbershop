@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.HOST || "0.0.0.0";
 const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Farhad2020";
 const VALID_GIFTS = new Set(["blow-dry", "beard-fade", "credit-99k"]);
 
@@ -179,11 +179,9 @@ app.post("/api/register", (req, res) => {
   }
 
   if (!isValidIranMobile(mobile)) {
-    return res
-      .status(400)
-      .json({
-        error: "فرمت شماره موبایل نامعتبر است. نمونه صحیح: 09123456789",
-      });
+    return res.status(400).json({
+      error: "فرمت شماره موبایل نامعتبر است. نمونه صحیح: 09123456789",
+    });
   }
 
   if (!VALID_GIFTS.has(gift)) {
