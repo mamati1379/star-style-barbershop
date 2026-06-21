@@ -19,26 +19,25 @@ export interface GiftOption {
 export const GIFT_OPTIONS: GiftOption[] = [
   {
     id: "blow-dry",
-    title: "سشوار و استایل مو (رایگان)",
-    description:
-      "یک مرتبه استایل‌دهی، حالت‌دهی و سشوار حرفه‌ای مو به سبک سالن‌های مدرن اروپایی",
+    title: "سشوار و استایل مو",
+    description: "",
     iconName: "Wind",
   },
   {
     id: "beard-fade",
-    title: "فید ریش / سایه (رایگان)",
-    description:
-      "طراحی، خط‌زنی هوشمند و سایه‌کاری (فیدینگ) تخصصی ریش متناسب با فرم چهره",
+    title: "فید ریش / سایه",
+    description: "",
     iconName: "Scissors",
   },
   {
     id: "credit-99k",
-    title: "۹۹ هزار تومن اعتبار برای تمامی خدمات",
-    description:
-      "شارژ فوری هدیه به ارزش ۹۹,۰۰۰ تومان قابل کسر از هزینه فاکتور مراجعات بعدی در سالن",
+    title: "۹۹ هزار تومن اعتبار",
+    description: "",
     iconName: "CreditCard",
   },
 ];
+
+export const FREE_LABEL = "رایگان";
 
 export const STATUS_LABELS = {
   registered: {

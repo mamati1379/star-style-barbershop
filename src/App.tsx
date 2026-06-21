@@ -24,7 +24,7 @@ import {
   Moon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { GIFT_OPTIONS, STATUS_LABELS } from "./types";
+import { GIFT_OPTIONS, STATUS_LABELS, FREE_LABEL } from "./types";
 import { formatJalali, toPersianDigits } from "./utils/jalali";
 
 interface Client {
@@ -1226,14 +1226,12 @@ export default function App() {
                                       {option.title}
                                     </span>
                                   </div>
-                                  <p
-                                    className={themeClass(
-                                      "text-[12px] text-zinc-600 mt-2 leading-relaxed",
-                                      "text-[12px] text-zinc-500 mt-2 leading-relaxed",
-                                    )}
-                                  >
-                                    {option.description}
-                                  </p>
+                                  {(option.id === "blow-dry" ||
+                                    option.id === "beard-fade") && (
+                                    <span className="inline-block mt-2 px-2 py-1 bg-green-500/20 text-green-600 text-xs font-bold rounded-md border border-green-500/40">
+                                      {FREE_LABEL}
+                                    </span>
+                                  )}
                                 </div>
                               </div>
                             </label>
