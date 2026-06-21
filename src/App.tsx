@@ -1232,6 +1232,11 @@ export default function App() {
                                       {FREE_LABEL}
                                     </span>
                                   )}
+                                  {option.id === "credit-99k" && (
+                                    <span className="inline-block mt-2 px-2 py-1 bg-blue-500/20 text-blue-600 text-xs font-bold rounded-md border border-blue-500/40">
+                                      برای تمامی خدمات
+                                    </span>
+                                  )}
                                 </div>
                               </div>
                             </label>
