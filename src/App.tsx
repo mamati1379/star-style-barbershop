@@ -705,7 +705,8 @@ export default function App() {
                         placeholder="جستجو با نام، موبایل یا کد رهگیری..."
                         className={themeClass(
                           "w-full bg-white border border-gray-300 rounded-2xl pr-10 pl-4 py-2.5 text-xs focus:border-amber-500 outline-none transition-all placeholder:text-gray-400 font-medium text-gray-800",
-                          "w-full bg-zinc-950 border border-zinc-800/80 rounded-2xl pr-10 pl-4 py-2.5 text-xs focus:border-amber-500 outline-zinc-600 font-medium"
+                          "w-full bg-zinc-950 border border-zinc-800/80 rounded-2xl pr-10 pl-4 py-2.5 text-xs focus:border-amber-500 outline-none transition-all placeholder:text-zinc-600 font-medium",
+                        )}
                       />
                     </div>
 
@@ -716,7 +717,10 @@ export default function App() {
                         <select
                           value={statusFilter}
                           onChange={(e) => setStatusFilter(e.target.value)}
-                          className="bg-zinc-950 border border-zinc-800 rounded-2xl px-3 py-2.5 text-xs focus:border-amber-500 outline-none text-zinc-300 font-bold cursor-pointer"
+                          className={themeClass(
+                            "bg-white border border-gray-300 rounded-2xl px-3 py-2.5 text-xs focus:border-amber-500 outline-none text-gray-800 font-bold cursor-pointer",
+                            "bg-zinc-950 border border-zinc-800 rounded-2xl px-3 py-2.5 text-xs focus:border-amber-500 outline-none text-zinc-300 font-bold cursor-pointer",
+                          )}
                         >
                           <option value="all">همه وضعیت‌ها</option>
                           <option value="registered">ثبت شده</option>
@@ -730,7 +734,10 @@ export default function App() {
                         <select
                           value={giftFilter}
                           onChange={(e) => setGiftFilter(e.target.value)}
-                          className="bg-zinc-950 border border-zinc-800 rounded-2xl px-3 py-2.5 text-xs focus:border-amber-500 outline-none text-zinc-300 font-bold cursor-pointer"
+                          className={themeClass(
+                            "bg-white border border-gray-300 rounded-2xl px-3 py-2.5 text-xs focus:border-amber-500 outline-none text-gray-800 font-bold cursor-pointer",
+                            "bg-zinc-950 border border-zinc-800 rounded-2xl px-3 py-2.5 text-xs focus:border-amber-500 outline-none text-zinc-300 font-bold cursor-pointer",
+                          )}
                         >
                           <option value="all">همه هدایا</option>
                           <option value="blow-dry">استایل مو (Blow Dry)</option>
@@ -772,7 +779,12 @@ export default function App() {
                       <div className="hidden md:block overflow-x-auto">
                         <table className="w-full border-collapse text-right text-xs">
                           <thead>
-                            <tr className="bg-zinc-950/45 text-zinc-500 border-b border-zinc-800 font-bold">
+                            <tr
+                              className={themeClass(
+                                "bg-gray-100 text-gray-700 border-b border-gray-200 font-bold",
+                                "bg-zinc-950/45 text-zinc-500 border-b border-zinc-800 font-bold",
+                              )}
+                            >
                               <th className="p-4 pr-6">#</th>
                               <th className="p-4">نام و نام خانوادگی</th>
                               <th className="p-4">شماره موبایل</th>
@@ -785,7 +797,12 @@ export default function App() {
                               </th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-zinc-800/40">
+                          <tbody
+                            className={themeClass(
+                              "divide-y divide-gray-200",
+                              "divide-y divide-zinc-800/40",
+                            )}
+                          >
                             {filteredClients.map((client, idx) => {
                               const giftDetail = GIFT_OPTIONS.find(
                                 (g) => g.id === client.gift,
@@ -797,16 +814,32 @@ export default function App() {
                               return (
                                 <tr
                                   key={client.id}
-                                  className="hover:bg-zinc-900/25 transition-colors"
+                                  className={themeClass(
+                                    "hover:bg-gray-50 transition-colors text-gray-700",
+                                    "hover:bg-zinc-900/25 transition-colors text-zinc-300",
+                                  )}
                                 >
-                                  <td className="p-4 pr-6 font-mono text-zinc-500">
+                                  <td
+                                    className={themeClass(
+                                      "p-4 pr-6 font-mono text-gray-600",
+                                      "p-4 pr-6 font-mono text-zinc-500",
+                                    )}
+                                  >
                                     {toPersianDigits(idx + 1)}
                                   </td>
-                                  <td className="p-4 font-bold text-zinc-200">
+                                  <td
+                                    className={themeClass(
+                                      "p-4 font-bold text-gray-900",
+                                      "p-4 font-bold text-zinc-200",
+                                    )}
+                                  >
                                     {client.fullName}
                                   </td>
                                   <td
-                                    className="p-4 font-mono text-zinc-300"
+                                    className={themeClass(
+                                      "p-4 font-mono text-gray-700",
+                                      "p-4 font-mono text-zinc-300",
+                                    )}
                                     dir="ltr"
                                   >
                                     {toPersianDigits(client.mobile)}
@@ -1590,25 +1623,40 @@ export default function App() {
       {/* Elegant Footer conforming to instructions */}
       <footer
         className={themeClass(
-          "mt-auto border-t border-zinc-200 bg-white/80 py-6 px-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4 z-10 font-medium",
-          "mt-auto border-t border-zinc-900 bg-black/40 py-6 px-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4 z-10 font-medium",
+          "mt-auto border-t border-zinc-200 bg-white/80 py-6 px-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4 z-10 font-bold",
+          "mt-auto border-t border-zinc-900 bg-black/40 py-6 px-4 sm:px-12 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4 z-10 font-bold",
         )}
       >
-        <p className={themeClass("text-zinc-700", "text-zinc-450")}>
+        <p
+          className={themeClass(
+            "text-zinc-800 font-black",
+            "text-zinc-350 font-bold",
+          )}
+        >
           طراحی و توسعه توسط تیم یزدان سرور
         </p>
-        <p className={themeClass("text-zinc-700", "text-zinc-450")}>
+        <p
+          className={themeClass(
+            "text-zinc-800 font-black",
+            "text-amber-400 font-bold",
+          )}
+        >
           <a
             href="tel:09122630557"
-            className="hover:text-amber-500 transition-colors font-bold"
+            className="hover:text-amber-500 transition-colors font-black"
           >
             ۰۹۱۲۲۶۳۰۵۵۷
           </a>
         </p>
-        <p className={themeClass("text-zinc-600", "text-zinc-450")}>
+        <p
+          className={themeClass(
+            "text-zinc-800 font-bold",
+            "text-zinc-350 font-bold",
+          )}
+        >
           برای سفارش پروژه طراحی سایت یا اپ انلاین تماس بگیرید
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-4 font-bold">
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             پشتیبانی فعال
