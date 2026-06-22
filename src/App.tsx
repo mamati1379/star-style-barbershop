@@ -1049,9 +1049,10 @@ export default function App() {
 
                       {/* Main title */}
                       <h2
-                        className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic whitespace-nowrap"
+                        className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic whitespace-nowrap drop-shadow-lg"
                         style={{
-                          color: isLightTheme ? "#1e3a8a" : "#60a5fa",
+                          color: "#d97706",
+                          textShadow: "0 4px 12px rgba(217, 119, 6, 0.4)",
                         }}
                       >
                         شمارا به زیبایی دعوت میکند
@@ -1155,15 +1156,15 @@ export default function App() {
                             <div
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex flex-row-reverse items-center justify-end gap-3 p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
+                              className={`flex flex-row-reverse items-center justify-end gap-3 p-4 sm:p-5 rounded-xl cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-[0_0_35px_rgba(245,158,11,0.4)]",
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-[0_0_35px_rgba(245,158,11,0.5)]",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-4 border-amber-900 text-black shadow-[0_0_50px_rgba(245,158,11,0.6)] animate-pulse",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-4 border-amber-900 text-black shadow-[0_0_50px_rgba(245,158,11,0.7)] animate-pulse",
                                     )
                                   : themeClass(
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-lg shadow-amber-600/30",
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-lg shadow-amber-600/50",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-2 border-amber-700 text-black shadow-lg shadow-amber-600/30",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-2 border-amber-700 text-black shadow-lg shadow-amber-600/50",
                                     )
                               }`}
                             >
@@ -1176,13 +1177,13 @@ export default function App() {
                                   <div className="flex gap-2 flex-wrap">
                                     {(option.id === "blow-dry" ||
                                       option.id === "beard-fade") && (
-                                      <span className="px-2.5 py-1 bg-white/20 text-black text-xs sm:text-sm font-black rounded border border-black/30">
+                                      <span className="px-3 py-1.5 bg-white/20 text-black text-sm font-black rounded border border-black/30">
                                         {FREE_LABEL}
                                       </span>
                                     )}
                                     {option.id === "credit-99k" && (
-                                      <span className="px-2.5 py-1 bg-white/20 text-black text-xs sm:text-sm font-black rounded border border-black/30">
-                                        برای تمامی خدمات
+                                      <span className="px-3 py-1.5 bg-white/20 text-black text-sm font-black rounded border border-black/30">
+                                        99k
                                       </span>
                                     )}
                                   </div>
@@ -1198,12 +1199,12 @@ export default function App() {
                                   </span>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block mt-1.5 px-2 py-0.5 bg-white/20 text-black text-xs font-black rounded border border-black/30">
+                                    <span className="inline-block mt-1 px-2.5 py-1 bg-white/20 text-black text-xs sm:text-sm font-black rounded border border-black/30">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block mt-1.5 px-2 py-0.5 bg-white/20 text-black text-xs font-black rounded border border-black/30">
+                                    <span className="inline-block mt-1 px-2.5 py-1 bg-white/20 text-black text-xs sm:text-sm font-black rounded border border-black/30">
                                       99k
                                     </span>
                                   )}
