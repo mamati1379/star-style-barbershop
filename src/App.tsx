@@ -1051,11 +1051,11 @@ export default function App() {
                           <span>🏢 استارمال، طبقه ۶</span>
                         </div>
                       </div>
-                      <div className="space-y-0 mb-2">
+                      <div className="flex flex-wrap gap-4 mb-4">
                         <span
                           className={themeClass(
-                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block mr-2",
-                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block mr-2",
+                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
+                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
                           )}
                           style={{
                             background: isLightTheme
