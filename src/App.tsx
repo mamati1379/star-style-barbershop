@@ -1037,50 +1037,39 @@ export default function App() {
                     transition={{ duration: 0.3 }}
                     className="space-y-6"
                   >
-                    <div className="space-y-3 sm:space-y-4 text-center lg:text-right">
-                      <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                        <div className="inline-flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 px-3.5 py-1.5 rounded-full text-amber-400 text-[10px] sm:text-xs font-bold tracking-widest leading-none">
-                          <Sparkles
-                            size={11}
-                            className="animate-pulse text-amber-550"
-                          />
-                          کمپین ویژه استار استایل
-                        </div>
-                        <div className="inline-flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-3.5 py-1.5 rounded-full text-zinc-300 text-[10px] sm:text-xs font-bold">
-                          <span className="inline-block w-1.5 h-1.5 bg-amber-500 rounded-full animate-ping"></span>
-                          <span>🏢 استارمال، طبقه ۶</span>
-                        </div>
+                    <div className="space-y-6 sm:space-y-8 text-center">
+                      {/* Logo */}
+                      <div className="flex justify-center mb-2">
+                        <img
+                          src={`${import.meta.env.BASE_URL}logo.png`}
+                          alt="استار استایل لوگو"
+                          className="h-20 sm:h-28 w-auto object-contain"
+                        />
                       </div>
-                      <div className="space-y-2 mb-6">
-                        <span
-                          className={themeClass(
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
-                          )}
+
+                      {/* Main titles */}
+                      <div className="space-y-4">
+                        <h1
+                          className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic"
                           style={{
                             color: "#ff8c00",
                           }}
                         >
                           سالن آرایشگاه استار استایل
-                        </span>
-                        <br />
-                        <span
-                          className={themeClass(
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
-                          )}
+                        </h1>
+                        <h2
+                          className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic"
                           style={{
                             color: isLightTheme ? "#1e3a8a" : "#60a5fa",
                           }}
                         >
                           شمارا به زیبایی دعوت میکند
-                        </span>
+                        </h2>
                       </div>
+
+                      {/* Gift selection prompt */}
                       <h3
-                        className={themeClass(
-                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-intense-blink",
-                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-intense-blink",
-                        )}
+                        className="text-3xl sm:text-4xl lg:text-5xl font-black italic mt-6 mb-4 tracking-tight animate-intense-blink"
                         style={{
                           color: "#ff8c00",
                         }}
@@ -1096,12 +1085,12 @@ export default function App() {
                         "space-y-5 bg-zinc-900/40 p-5 sm:p-8 rounded-3xl border border-zinc-850 backdrop-blur-sm shadow-xl",
                       )}
                     >
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                           <label
                             className={themeClass(
-                              "block text-xs text-zinc-600 mb-1.5 mr-1 font-bold",
-                              "block text-xs text-zinc-400 mb-1.5 mr-1 font-bold",
+                              "block text-sm sm:text-base text-zinc-700 mb-3 mr-1 font-black",
+                              "block text-sm sm:text-base text-zinc-300 mb-3 mr-1 font-black",
                             )}
                           >
                             نام و نام خانوادگی
@@ -1109,11 +1098,11 @@ export default function App() {
                           <div className="relative">
                             <span
                               className={themeClass(
-                                "absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500",
-                                "absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-600",
+                                "absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500",
+                                "absolute right-4 top-1/2 -translate-y-1/2 text-zinc-600",
                               )}
                             >
-                              <User size={15} />
+                              <User size={18} />
                             </span>
                             <input
                               type="text"
@@ -1121,8 +1110,8 @@ export default function App() {
                               onChange={(e) => setFullName(e.target.value)}
                               placeholder="مثال: امیرحسین علیزاده"
                               className={themeClass(
-                                "w-full bg-zinc-50 border border-zinc-300 rounded-xl pr-10 pl-4 py-3 text-sm focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400 text-right text-zinc-900",
-                                "w-full bg-zinc-950 border border-zinc-800 rounded-xl pr-10 pl-4 py-3 text-sm focus:border-amber-500 outline-none transition-all placeholder:text-zinc-600 text-right",
+                                "w-full bg-zinc-50 border-2 border-zinc-300 rounded-2xl pr-12 pl-4 py-3.5 text-sm sm:text-base focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400 text-right text-zinc-900 font-medium",
+                                "w-full bg-zinc-950 border-2 border-zinc-800 rounded-2xl pr-12 pl-4 py-3.5 text-sm sm:text-base focus:border-amber-500 outline-none transition-all placeholder:text-zinc-600 text-right font-medium",
                               )}
                               required
                             />
@@ -1132,8 +1121,8 @@ export default function App() {
                         <div>
                           <label
                             className={themeClass(
-                              "block text-xs text-zinc-600 mb-1.5 mr-1 font-bold",
-                              "block text-xs text-zinc-400 mb-1.5 mr-1 font-bold",
+                              "block text-sm sm:text-base text-zinc-700 mb-3 mr-1 font-black",
+                              "block text-sm sm:text-base text-zinc-300 mb-3 mr-1 font-black",
                             )}
                           >
                             شماره موبایل
@@ -1141,11 +1130,11 @@ export default function App() {
                           <div className="relative">
                             <span
                               className={themeClass(
-                                "absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500",
-                                "absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-600",
+                                "absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500",
+                                "absolute right-4 top-1/2 -translate-y-1/2 text-zinc-600",
                               )}
                             >
-                              <Phone size={15} />
+                              <Phone size={18} />
                             </span>
                             <input
                               type="tel"
@@ -1153,8 +1142,8 @@ export default function App() {
                               onChange={(e) => setMobile(e.target.value)}
                               placeholder="۰۹۱۲۳۴۵۶۷۸۹"
                               className={themeClass(
-                                "w-full bg-zinc-50 border border-zinc-300 rounded-xl pr-10 pl-4 py-3 text-sm focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400 text-left tracking-wider font-mono text-zinc-900",
-                                "w-full bg-zinc-950 border border-zinc-800 rounded-xl pr-10 pl-4 py-3 text-sm focus:border-amber-500 outline-none transition-all placeholder:text-zinc-600 text-left tracking-wider font-mono",
+                                "w-full bg-zinc-50 border-2 border-zinc-300 rounded-2xl pr-12 pl-4 py-3.5 text-sm sm:text-base focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400 text-left tracking-wider font-mono text-zinc-900 font-medium",
+                                "w-full bg-zinc-950 border-2 border-zinc-800 rounded-2xl pr-12 pl-4 py-3.5 text-sm sm:text-base focus:border-amber-500 outline-none transition-all placeholder:text-zinc-600 text-left tracking-wider font-mono font-medium",
                               )}
                               required
                             />
@@ -1165,86 +1154,86 @@ export default function App() {
                       <div>
                         <label
                           className={themeClass(
-                            "block text-xs text-zinc-600 mb-4 mr-1 font-bold",
-                            "block text-xs text-zinc-400 mb-4 mr-1 font-bold",
+                            "block text-base sm:text-lg text-zinc-700 mb-6 mr-1 font-black",
+                            "block text-base sm:text-lg text-zinc-300 mb-6 mr-1 font-black",
                           )}
                         >
                           انتخاب هدیه خوش‌آمدگویی (یکی از موارد)
                         </label>
-                        <div className="space-y-3.5">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-3">
                           {GIFT_OPTIONS.map((option, idx) => (
                             <div
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex flex-col items-center justify-center gap-3 p-6 rounded-3xl border-2 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
+                              className={`flex flex-col items-center justify-center gap-3 p-8 sm:p-10 rounded-3xl border-3 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
-                                      "bg-amber-100 border-amber-500 text-zinc-900 shadow-[0_0_25px_rgba(245,158,11,0.3)]",
-                                      "bg-amber-500/20 border-amber-400 text-zinc-100 shadow-[0_0_25px_rgba(245,158,11,0.2)]",
+                                      "bg-amber-100 border-amber-500 text-zinc-900 shadow-[0_0_35px_rgba(245,158,11,0.4)]",
+                                      "bg-amber-500/25 border-amber-400 text-zinc-100 shadow-[0_0_35px_rgba(245,158,11,0.3)]",
                                     )
                                   : themeClass(
-                                      "bg-white border-zinc-300 hover:border-amber-400 text-zinc-700",
-                                      "bg-zinc-900/60 border-zinc-700 hover:border-amber-500 text-zinc-300",
+                                      "bg-white border-zinc-300 hover:border-amber-400 text-zinc-700 shadow-lg shadow-zinc-200/50",
+                                      "bg-zinc-900/70 border-zinc-700 hover:border-amber-500 text-zinc-200 shadow-lg shadow-black/30",
                                     )
                               }`}
                             >
                               {selectedGift === option.id ? (
                                 // Digital ticket card view when selected
-                                <div className="w-full text-center">
-                                  <div className="flex justify-center mb-3">
+                                <div className="w-full text-center space-y-4">
+                                  <div className="flex justify-center">
                                     {renderIcon(
                                       option.iconName,
-                                      40,
-                                      "text-amber-500",
+                                      56,
+                                      "text-amber-600",
                                     )}
                                   </div>
-                                  <h4 className="text-2xl sm:text-3xl font-black mb-2">
+                                  <h4 className="text-3xl sm:text-4xl font-black leading-tight">
                                     {option.title}
                                   </h4>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block px-4 py-2 bg-green-500/40 text-green-700 dark:text-green-400 text-lg font-black rounded-lg border border-green-500/80">
+                                    <span className="inline-block px-5 py-2.5 bg-green-500/50 text-green-800 dark:text-green-300 text-xl font-black rounded-lg border-2 border-green-600 shadow-lg">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block px-4 py-2 bg-blue-500/40 text-blue-700 dark:text-blue-400 text-lg font-black rounded-lg border border-blue-500/80">
+                                    <span className="inline-block px-5 py-2.5 bg-blue-500/50 text-blue-800 dark:text-blue-300 text-xl font-black rounded-lg border-2 border-blue-600 shadow-lg">
                                       برای تمامی خدمات
                                     </span>
                                   )}
-                                  <div className="mt-4 text-sm opacity-75">
+                                  <div className="mt-3 text-base sm:text-lg opacity-80 font-bold animate-intense-blink">
                                     کلیک کنید برای نمایش بلیط
                                   </div>
                                 </div>
                               ) : (
                                 // Compact view when not selected
-                                <div className="flex flex-col items-center text-center">
-                                  <span className="mb-2">
+                                <div className="flex flex-col items-center text-center space-y-3">
+                                  <span>
                                     {renderIcon(
                                       option.iconName,
-                                      32,
+                                      48,
                                       isLightTheme
                                         ? "text-zinc-600"
                                         : "text-zinc-400",
                                     )}
                                   </span>
                                   <span
-                                    className={`text-lg sm:text-2xl font-black leading-tight ${
+                                    className={`text-2xl sm:text-3xl font-black leading-tight ${
                                       isLightTheme
                                         ? "text-zinc-900"
-                                        : "text-zinc-200"
+                                        : "text-zinc-100"
                                     }`}
                                   >
                                     {option.title}
                                   </span>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block mt-3 px-3 py-1.5 bg-green-500/30 text-green-700 dark:text-green-400 text-sm font-black rounded border border-green-500/60">
+                                    <span className="inline-block mt-2 px-4 py-2 bg-green-500/40 text-green-800 dark:text-green-300 text-sm sm:text-base font-black rounded border-2 border-green-500">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block mt-3 px-3 py-1.5 bg-blue-500/30 text-blue-700 dark:text-blue-400 text-sm font-black rounded border border-blue-500/60">
+                                    <span className="inline-block mt-2 px-4 py-2 bg-blue-500/40 text-blue-800 dark:text-blue-300 text-sm sm:text-base font-black rounded border-2 border-blue-500">
                                       برای تمامی خدمات
                                     </span>
                                   )}
@@ -1264,7 +1253,7 @@ export default function App() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-4 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-black text-sm rounded-xl shadow-[0_10px_35px_rgba(245,158,11,0.2)] hover:shadow-[0_10px_45px_rgba(245,158,11,0.4)] transition-all active:scale-[0.98] cursor-pointer hover-lift btn-shine relative overflow-hidden group animate-fade-in-text"
+                        className="w-full py-4 sm:py-5 bg-gradient-to-r from-amber-600 to-amber-500 text-black font-black text-base sm:text-lg rounded-2xl shadow-[0_10px_35px_rgba(245,158,11,0.3)] hover:shadow-[0_15px_50px_rgba(245,158,11,0.5)] transition-all active:scale-[0.98] cursor-pointer hover-lift btn-shine relative overflow-hidden group animate-fade-in-text disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         {isSubmitting
                           ? "در حال ثبت اطلاعات گرانبهای شما..."
