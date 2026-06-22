@@ -1047,12 +1047,26 @@ export default function App() {
                         />
                       </div>
 
+                      {/* STAR STYLE label */}
+                      <div
+                        className="text-2xl sm:text-4xl font-black tracking-widest"
+                        style={{
+                          color: "#d0a753",
+                          textShadow: "0 1px 3px rgba(208, 167, 83, 0.2)",
+                          fontFamily: "'Morabba', sans-serif",
+                        }}
+                      >
+                        STAR STYLE
+                      </div>
+
                       {/* Main title */}
                       <h2
-                        className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic whitespace-nowrap drop-shadow-lg"
+                        className="text-3xl sm:text-5xl lg:text-6xl leading-tight whitespace-nowrap"
                         style={{
                           color: "#d97706",
-                          textShadow: "0 4px 12px rgba(217, 119, 6, 0.4)",
+                          textShadow: "0 2px 8px rgba(217, 119, 6, 0.3)",
+                          fontFamily: "'Morabba', sans-serif",
+                          fontWeight: "600",
                         }}
                       >
                         شمارا به زیبایی دعوت میکند
@@ -1060,12 +1074,14 @@ export default function App() {
 
                       {/* Gift selection prompt */}
                       <h3
-                        className="text-3xl sm:text-4xl lg:text-5xl font-black italic mt-6 mb-4 tracking-tight animate-intense-blink"
+                        className="text-3xl sm:text-4xl lg:text-5xl mt-6 mb-4 tracking-tight animate-intense-blink"
                         style={{
                           color: "#ff8c00",
+                          fontFamily: "'Hamrah', sans-serif",
+                          fontWeight: "400",
                         }}
                       >
-                        🎁 هدیه خود را انتخاب کنید
+                        🎁 هدیه خود را دریافت کنید
                       </h3>
                     </div>
 

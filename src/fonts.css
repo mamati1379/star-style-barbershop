@@ -100,3 +100,24 @@
     font-style: normal;
     font-display: swap;
 }
+
+/* Morabba Font Family */
+/* Semi Bold - Weight 600 */
+@font-face {
+    font-family: "Morabba";
+    src: url("/star-style-barbershop/fonts/Morabba-SemiBold.ttf")
+        format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Hamrah Font Family */
+/* Regular - Weight 400 */
+@font-face {
+    font-family: "Hamrah";
+    src: url("/star-style-barbershop/fonts/Hamrah.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
