@@ -1160,80 +1160,72 @@ export default function App() {
                         >
                           انتخاب هدیه خوش‌آمدگویی (یکی از موارد)
                         </label>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-2.5">
                           {GIFT_OPTIONS.map((option, idx) => (
                             <div
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex flex-col items-center justify-center gap-3 p-8 sm:p-10 rounded-3xl border-3 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
+                              className={`flex flex-col items-center justify-center gap-2 p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
-                                      "bg-amber-100 border-amber-500 text-zinc-900 shadow-[0_0_35px_rgba(245,158,11,0.4)]",
-                                      "bg-amber-500/25 border-amber-400 text-zinc-100 shadow-[0_0_35px_rgba(245,158,11,0.3)]",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-[0_0_35px_rgba(245,158,11,0.4)]",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-[0_0_35px_rgba(245,158,11,0.5)]",
                                     )
                                   : themeClass(
-                                      "bg-white border-zinc-300 hover:border-amber-400 text-zinc-700 shadow-lg shadow-zinc-200/50",
-                                      "bg-zinc-900/70 border-zinc-700 hover:border-amber-500 text-zinc-200 shadow-lg shadow-black/30",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-lg shadow-amber-600/30",
+                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-lg shadow-amber-600/50",
                                     )
                               }`}
                             >
                               {selectedGift === option.id ? (
                                 // Digital ticket card view when selected
-                                <div className="w-full text-center space-y-4">
+                                <div className="w-full text-center space-y-3">
                                   <div className="flex justify-center">
                                     {renderIcon(
                                       option.iconName,
-                                      56,
-                                      "text-amber-600",
+                                      42,
+                                      "text-black",
                                     )}
                                   </div>
-                                  <h4 className="text-3xl sm:text-4xl font-black leading-tight">
+                                  <h4 className="text-xl sm:text-2xl font-black leading-tight text-black">
                                     {option.title}
                                   </h4>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block px-5 py-2.5 bg-green-500/50 text-green-800 dark:text-green-300 text-xl font-black rounded-lg border-2 border-green-600 shadow-lg">
+                                    <span className="inline-block px-3 py-1.5 bg-white/20 text-black text-base font-black rounded border-2 border-black/30 shadow-lg">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block px-5 py-2.5 bg-blue-500/50 text-blue-800 dark:text-blue-300 text-xl font-black rounded-lg border-2 border-blue-600 shadow-lg">
+                                    <span className="inline-block px-3 py-1.5 bg-white/20 text-black text-base font-black rounded border-2 border-black/30 shadow-lg">
                                       برای تمامی خدمات
                                     </span>
                                   )}
-                                  <div className="mt-3 text-base sm:text-lg opacity-80 font-bold animate-intense-blink">
+                                  <div className="mt-2 text-base sm:text-lg text-black opacity-90 font-bold animate-intense-blink">
                                     کلیک کنید برای نمایش بلیط
                                   </div>
                                 </div>
                               ) : (
                                 // Compact view when not selected
-                                <div className="flex flex-col items-center text-center space-y-3">
+                                <div className="flex flex-col items-center text-center space-y-1.5">
                                   <span>
                                     {renderIcon(
                                       option.iconName,
-                                      48,
-                                      isLightTheme
-                                        ? "text-zinc-600"
-                                        : "text-zinc-400",
+                                      36,
+                                      "text-black",
                                     )}
                                   </span>
-                                  <span
-                                    className={`text-2xl sm:text-3xl font-black leading-tight ${
-                                      isLightTheme
-                                        ? "text-zinc-900"
-                                        : "text-zinc-100"
-                                    }`}
-                                  >
+                                  <span className="text-xl sm:text-2xl font-black leading-tight text-black">
                                     {option.title}
                                   </span>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block mt-2 px-4 py-2 bg-green-500/40 text-green-800 dark:text-green-300 text-sm sm:text-base font-black rounded border-2 border-green-500">
+                                    <span className="inline-block mt-1 px-3 py-1.5 bg-white/20 text-black text-sm sm:text-base font-black rounded border-2 border-black/30">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block mt-2 px-4 py-2 bg-blue-500/40 text-blue-800 dark:text-blue-300 text-sm sm:text-base font-black rounded border-2 border-blue-500">
+                                    <span className="inline-block mt-1 px-3 py-1.5 bg-white/20 text-black text-sm sm:text-base font-black rounded border-2 border-black/30">
                                       برای تمامی خدمات
                                     </span>
                                   )}
