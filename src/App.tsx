@@ -1054,14 +1054,11 @@ export default function App() {
                       <div className="space-y-2 mb-6">
                         <span
                           className={themeClass(
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
                           )}
                           style={{
-                            background: isLightTheme
-                              ? "linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%)"
-                              : "linear-gradient(135deg, rgba(217, 119, 6, 0.25) 0%, rgba(245, 158, 11, 0.15) 100%)",
-                            color: isLightTheme ? "#92400e" : "#fcd34d",
+                            color: "#ff8c00",
                           }}
                         >
                           سالن آرایشگاه استار استایل
@@ -1069,14 +1066,11 @@ export default function App() {
                         <br />
                         <span
                           className={themeClass(
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
-                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic",
                           )}
                           style={{
-                            background: isLightTheme
-                              ? "linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(96, 165, 250, 0.1) 100%)"
-                              : "linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(96, 165, 250, 0.15) 100%)",
-                            color: isLightTheme ? "#1e40af" : "#60a5fa",
+                            color: isLightTheme ? "#1e3a8a" : "#60a5fa",
                           }}
                         >
                           شمارا به زیبایی دعوت میکند
@@ -1099,13 +1093,11 @@ export default function App() {
 
                       <h3
                         className={themeClass(
-                          "text-2xl sm:text-3xl lg:text-4xl font-black text-amber-600 italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1 px-4 py-3 rounded-xl inline-block",
-                          "text-2xl sm:text-3xl lg:text-4xl font-black text-amber-400 italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1 px-4 py-3 rounded-xl inline-block",
+                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1",
+                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1",
                         )}
                         style={{
-                          background: isLightTheme
-                            ? "linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(251, 146, 60, 0.1) 100%)"
-                            : "linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(251, 146, 60, 0.15) 100%)",
+                          color: "#ff8c00",
                         }}
                       >
                         🎁 هدیه خود را انتخاب کنید
@@ -1444,8 +1436,13 @@ export default function App() {
                 <div className="bg-gradient-to-l from-amber-600 to-amber-500 p-6 text-black flex justify-between items-center relative">
                   <div>
                     <div className="font-black italic text-xl tracking-tight leading-none">
-                      این کارت فقط برای اولین مراجعه معتبر بوده و قابل استفاده
-                      توسط مشتریان جدید است.
+                      توجه{" "}
+                    </div>
+                    <div className="font-black italic text-xl tracking-tight leading-none">
+                      این بلیط فقط برای اولین مراجعه معتبر است{" "}
+                    </div>
+                    <div className="font-black italic text-xl tracking-tight leading-none">
+                      و قابل استفاده برای مشتریان قبلی نیست
                     </div>
                     <span className="text-[9px] font-extrabold tracking-widest opacity-80 uppercase">
                       STAR STYLE GENTS
