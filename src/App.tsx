@@ -1175,12 +1175,12 @@ export default function App() {
                               className={`flex flex-row-reverse items-center justify-end gap-3 p-4 sm:p-5 rounded-xl cursor-pointer transition-all gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-4 border-amber-900 text-black shadow-[0_0_50px_rgba(245,158,11,0.6)] animate-pulse",
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-4 border-amber-900 text-black shadow-[0_0_50px_rgba(245,158,11,0.7)] animate-pulse",
+                                      "bg-gradient-to-r from-amber-500 to-amber-400 border-4 border-amber-900 text-black shadow-[0_0_50px_rgba(245,158,11,0.6)] animate-pulse",
+                                      "bg-gradient-to-r from-amber-500 to-amber-400 border-4 border-amber-900 text-black shadow-[0_0_50px_rgba(245,158,11,0.7)] animate-pulse",
                                     )
                                   : themeClass(
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-2 border-amber-700 text-black shadow-lg shadow-amber-600/30",
-                                      "bg-gradient-to-r from-amber-600 to-amber-500 border-2 border-amber-700 text-black shadow-lg shadow-amber-600/50",
+                                      "bg-gradient-to-r from-amber-700 to-amber-600 border-2 border-amber-800 text-black shadow-lg shadow-amber-700/40",
+                                      "bg-gradient-to-r from-amber-700 to-amber-600 border-2 border-amber-800 text-black shadow-lg shadow-amber-700/50",
                                     )
                               }`}
                             >
@@ -1202,9 +1202,6 @@ export default function App() {
                                         99k
                                       </span>
                                     )}
-                                  </div>
-                                  <div className="mt-2 text-xs sm:text-sm text-black opacity-90 font-bold animate-intense-blink">
-                                    کلیک برای بلیط
                                   </div>
                                 </div>
                               ) : (
