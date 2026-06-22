@@ -1047,25 +1047,15 @@ export default function App() {
                         />
                       </div>
 
-                      {/* Main titles */}
-                      <div className="space-y-4">
-                        <h1
-                          className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic"
-                          style={{
-                            color: "#ff8c00",
-                          }}
-                        >
-                          سالن آرایشگاه استار استایل
-                        </h1>
-                        <h2
-                          className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic"
-                          style={{
-                            color: isLightTheme ? "#1e3a8a" : "#60a5fa",
-                          }}
-                        >
-                          شمارا به زیبایی دعوت میکند
-                        </h2>
-                      </div>
+                      {/* Main title */}
+                      <h2
+                        className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight italic whitespace-nowrap"
+                        style={{
+                          color: isLightTheme ? "#1e3a8a" : "#60a5fa",
+                        }}
+                      >
+                        شمارا به زیبایی دعوت میکند
+                      </h2>
 
                       {/* Gift selection prompt */}
                       <h3
@@ -1165,7 +1155,7 @@ export default function App() {
                             <div
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex flex-col items-center justify-center gap-2 p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
+                              className={`flex flex-row-reverse items-center justify-end gap-3 p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
                                       "bg-gradient-to-r from-amber-600 to-amber-500 border-amber-700 text-black shadow-[0_0_35px_rgba(245,158,11,0.4)]",
@@ -1179,58 +1169,54 @@ export default function App() {
                             >
                               {selectedGift === option.id ? (
                                 // Digital ticket card view when selected
-                                <div className="w-full text-center space-y-3">
-                                  <div className="flex justify-center">
-                                    {renderIcon(
-                                      option.iconName,
-                                      42,
-                                      "text-black",
-                                    )}
-                                  </div>
-                                  <h4 className="text-xl sm:text-2xl font-black leading-tight text-black">
+                                <div className="flex-1 text-right">
+                                  <h4 className="text-lg sm:text-xl font-black leading-tight text-black mb-2">
                                     {option.title}
                                   </h4>
-                                  {(option.id === "blow-dry" ||
-                                    option.id === "beard-fade") && (
-                                    <span className="inline-block px-3 py-1.5 bg-white/20 text-black text-base font-black rounded border-2 border-black/30 shadow-lg">
-                                      {FREE_LABEL}
-                                    </span>
-                                  )}
-                                  {option.id === "credit-99k" && (
-                                    <span className="inline-block px-3 py-1.5 bg-white/20 text-black text-base font-black rounded border-2 border-black/30 shadow-lg">
-                                      برای تمامی خدمات
-                                    </span>
-                                  )}
-                                  <div className="mt-2 text-base sm:text-lg text-black opacity-90 font-bold animate-intense-blink">
-                                    کلیک کنید برای نمایش بلیط
+                                  <div className="flex gap-2 flex-wrap">
+                                    {(option.id === "blow-dry" ||
+                                      option.id === "beard-fade") && (
+                                      <span className="px-2.5 py-1 bg-white/20 text-black text-xs sm:text-sm font-black rounded border border-black/30">
+                                        {FREE_LABEL}
+                                      </span>
+                                    )}
+                                    {option.id === "credit-99k" && (
+                                      <span className="px-2.5 py-1 bg-white/20 text-black text-xs sm:text-sm font-black rounded border border-black/30">
+                                        برای تمامی خدمات
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="mt-2 text-xs sm:text-sm text-black opacity-90 font-bold animate-intense-blink">
+                                    کلیک برای بلیط
                                   </div>
                                 </div>
                               ) : (
                                 // Compact view when not selected
-                                <div className="flex flex-col items-center text-center space-y-1.5">
-                                  <span>
-                                    {renderIcon(
-                                      option.iconName,
-                                      36,
-                                      "text-black",
-                                    )}
-                                  </span>
-                                  <span className="text-xl sm:text-2xl font-black leading-tight text-black">
+                                <div className="flex-1 text-right">
+                                  <span className="text-lg sm:text-xl font-black leading-tight text-black block">
                                     {option.title}
                                   </span>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block mt-1 px-3 py-1.5 bg-white/20 text-black text-sm sm:text-base font-black rounded border-2 border-black/30">
+                                    <span className="inline-block mt-1.5 px-2 py-0.5 bg-white/20 text-black text-xs font-black rounded border border-black/30">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block mt-1 px-3 py-1.5 bg-white/20 text-black text-sm sm:text-base font-black rounded border-2 border-black/30">
-                                      برای تمامی خدمات
+                                    <span className="inline-block mt-1.5 px-2 py-0.5 bg-white/20 text-black text-xs font-black rounded border border-black/30">
+                                      99k
                                     </span>
                                   )}
                                 </div>
                               )}
+                              {/* Icon - shown for both states */}
+                              <span className="flex-shrink-0">
+                                {renderIcon(
+                                  option.iconName,
+                                  selectedGift === option.id ? 32 : 28,
+                                  "text-black",
+                                )}
+                              </span>
                             </div>
                           ))}
                         </div>
