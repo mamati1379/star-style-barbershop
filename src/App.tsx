@@ -1043,13 +1043,13 @@ export default function App() {
                         <img
                           src={`${import.meta.env.BASE_URL}logo.png`}
                           alt="استار استایل لوگو"
-                          className="h-20 sm:h-28 w-auto object-contain"
+                          className="h-32 sm:h-44 w-auto object-contain"
                         />
                       </div>
 
                       {/* STAR STYLE label */}
                       <div
-                        className="text-2xl sm:text-4xl font-black tracking-widest"
+                        className="text-3xl sm:text-6xl font-black tracking-widest"
                         style={{
                           color: "#d0a753",
                           textShadow: "0 1px 3px rgba(208, 167, 83, 0.2)",
