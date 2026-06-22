@@ -1172,7 +1172,7 @@ export default function App() {
                             <div
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex flex-row-reverse items-center justify-end gap-3 p-4 sm:p-5 rounded-xl cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
+                              className={`flex flex-row-reverse items-center justify-end gap-3 p-4 sm:p-5 rounded-xl cursor-pointer transition-all gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
                                       "bg-gradient-to-r from-amber-600 to-amber-500 border-4 border-amber-900 text-black shadow-[0_0_50px_rgba(245,158,11,0.6)] animate-pulse",
