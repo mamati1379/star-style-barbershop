@@ -1413,7 +1413,10 @@ export default function App() {
                 {/* Gold Ticket Header */}
                 <div className="bg-gradient-to-l from-amber-600 to-amber-500 p-6 text-black flex justify-between items-center relative">
                   <div>
-                    <div className="font-black italic text-xl tracking-tight leading-none">
+                    <div
+                      className="font-black italic text-3xl sm:text-4xl tracking-tight leading-none animate-pulse"
+                      style={{ color: "#be123c" }}
+                    >
                       توجه{" "}
                     </div>
                     <div className="font-black italic text-xl tracking-tight leading-none">
