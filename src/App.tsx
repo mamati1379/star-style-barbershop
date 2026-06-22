@@ -1051,15 +1051,36 @@ export default function App() {
                           <span>🏢 استارمال، طبقه ۶</span>
                         </div>
                       </div>
-                      <h2
-                        className={themeClass(
-                          "text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-zinc-950 italic",
-                          "text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white italic",
-                        )}
-                      >
-                        آرایشگاه استار استایل شمارو به زیبایی{" "}
-                        <span className="text-amber-500">دعوت میکند</span>
-                      </h2>
+                      <div className="space-y-4">
+                        <h2
+                          className={themeClass(
+                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
+                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
+                          )}
+                          style={{
+                            background: isLightTheme
+                              ? "linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%)"
+                              : "linear-gradient(135deg, rgba(217, 119, 6, 0.25) 0%, rgba(245, 158, 11, 0.15) 100%)",
+                            color: isLightTheme ? "#92400e" : "#fcd34d",
+                          }}
+                        >
+                          سالن آرایشگاه استار استایل
+                        </h2>
+                        <h2
+                          className={themeClass(
+                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
+                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
+                          )}
+                          style={{
+                            background: isLightTheme
+                              ? "linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(96, 165, 250, 0.1) 100%)"
+                              : "linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(96, 165, 250, 0.15) 100%)",
+                            color: isLightTheme ? "#1e40af" : "#60a5fa",
+                          }}
+                        >
+                          شمارا به زیبایی دعوت میکند
+                        </h2>
+                      </div>
                       <p
                         className={themeClass(
                           "text-zinc-700 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4",
@@ -1074,19 +1095,22 @@ export default function App() {
                         منتظر شما است. کافی‌ست در فرم زیر ثبت‌نام کرده و بلیت
                         VIP دیجیتال خود را بلافاصله دریافت نمایید!
                       </p>
-                      <p
-                        className={themeClass(
-                          "text-zinc-700 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4",
-                          "text-zinc-350 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4",
-                        )}
-                      ></p>
+
                       <h3
                         className={themeClass(
-                          "text-2xl sm:text-4xl font-black text-amber-600 italic mb-6 tracking-tight animate-fade-in-text stagger-1",
-                          "text-2xl sm:text-4xl font-black text-amber-400 italic mb-6 tracking-tight animate-fade-in-text stagger-1",
+                          "text-3xl sm:text-5xl lg:text-6xl font-black text-amber-600 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-6 py-4 rounded-2xl inline-block",
+                          "text-3xl sm:text-5xl lg:text-6xl font-black text-amber-400 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-6 py-4 rounded-2xl inline-block",
                         )}
+                        style={{
+                          background: isLightTheme
+                            ? "linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(251, 146, 60, 0.1) 100%)"
+                            : "linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(251, 146, 60, 0.15) 100%)",
+                        }}
                       >
                         🎁 هدیه خود را انتخاب کنید
+                        <div className="text-4xl animate-bounce-gentle mt-2">
+                          ⬇️
+                        </div>
                       </h3>
                     </div>
 
@@ -1221,19 +1245,19 @@ export default function App() {
                                       )}
                                     </span>
                                     <span
-                                      className={`text-sm sm:text-base font-bold leading-none ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-800" : "text-zinc-350"}`}
+                                      className={`text-lg sm:text-2xl font-black leading-tight ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-900" : "text-zinc-200"}`}
                                     >
                                       {option.title}
                                     </span>
                                   </div>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block mt-2 px-2 py-1 bg-green-500/20 text-green-600 text-xs font-bold rounded-md border border-green-500/40">
+                                    <span className="inline-block mt-3 px-3 py-2 bg-green-500/30 text-green-700 dark:text-green-400 text-sm sm:text-base font-black rounded-lg border border-green-500/60">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block mt-2 px-2 py-1 bg-blue-500/20 text-blue-600 text-xs font-bold rounded-md border border-blue-500/40">
+                                    <span className="inline-block mt-3 px-3 py-2 bg-blue-500/30 text-blue-700 dark:text-blue-400 text-sm sm:text-base font-black rounded-lg border border-blue-500/60">
                                       برای تمامی خدمات
                                     </span>
                                   )}
