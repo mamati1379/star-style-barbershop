@@ -355,7 +355,7 @@ export default function App() {
       >
         <div className="flex items-center gap-3 hover-lift">
           <img
-            src="/logo.png"
+            src={`${import.meta.env.BASE_URL}logo.png`}
             alt="Star Style Logo"
             className="w-12 h-12 animate-logo-float drop-shadow-[0_0_8px_rgba(245,158,11,0.4)]"
           />
@@ -1051,11 +1051,11 @@ export default function App() {
                           <span>🏢 استارمال، طبقه ۶</span>
                         </div>
                       </div>
-                      <div className="flex flex-wrap gap-4 mb-4">
+                      <div className="space-y-2 mb-6">
                         <span
                           className={themeClass(
-                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
-                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
                           )}
                           style={{
                             background: isLightTheme
@@ -1066,10 +1066,11 @@ export default function App() {
                         >
                           سالن آرایشگاه استار استایل
                         </span>
+                        <br />
                         <span
                           className={themeClass(
-                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
-                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
+                            "text-2xl sm:text-4xl lg:text-4xl font-black leading-tight italic px-4 py-3 rounded-xl inline-block",
                           )}
                           style={{
                             background: isLightTheme
@@ -1098,8 +1099,8 @@ export default function App() {
 
                       <h3
                         className={themeClass(
-                          "text-lg sm:text-2xl lg:text-3xl font-black text-amber-600 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-3 py-2 rounded-lg inline-block",
-                          "text-lg sm:text-2xl lg:text-3xl font-black text-amber-400 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-3 py-2 rounded-lg inline-block",
+                          "text-2xl sm:text-3xl lg:text-4xl font-black text-amber-600 italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1 px-4 py-3 rounded-xl inline-block",
+                          "text-2xl sm:text-3xl lg:text-4xl font-black text-amber-400 italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1 px-4 py-3 rounded-xl inline-block",
                         )}
                         style={{
                           background: isLightTheme
@@ -1242,19 +1243,19 @@ export default function App() {
                                       )}
                                     </span>
                                     <span
-                                      className={`text-lg sm:text-2xl font-black leading-tight ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-900" : "text-zinc-200"}`}
+                                      className={`text-xl sm:text-3xl font-black leading-tight ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-900" : "text-zinc-200"}`}
                                     >
                                       {option.title}
                                     </span>
                                   </div>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block mt-3 px-3 py-2 bg-green-500/30 text-green-700 dark:text-green-400 text-sm sm:text-base font-black rounded-lg border border-green-500/60">
+                                    <span className="inline-block mt-4 px-5 py-3 bg-green-500/30 text-green-700 dark:text-green-400 text-lg sm:text-xl font-black rounded-lg border border-green-500/60">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block mt-3 px-3 py-2 bg-blue-500/30 text-blue-700 dark:text-blue-400 text-sm sm:text-base font-black rounded-lg border border-blue-500/60">
+                                    <span className="inline-block mt-4 px-5 py-3 bg-blue-500/30 text-blue-700 dark:text-blue-400 text-lg sm:text-xl font-black rounded-lg border border-blue-500/60">
                                       برای تمامی خدمات
                                     </span>
                                   )}
