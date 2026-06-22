@@ -1051,11 +1051,11 @@ export default function App() {
                           <span>🏢 استارمال، طبقه ۶</span>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <h2
+                      <div className="space-y-0 mb-2">
+                        <span
                           className={themeClass(
-                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
-                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
+                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block mr-2",
+                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block mr-2",
                           )}
                           style={{
                             background: isLightTheme
@@ -1065,11 +1065,11 @@ export default function App() {
                           }}
                         >
                           سالن آرایشگاه استار استایل
-                        </h2>
-                        <h2
+                        </span>
+                        <span
                           className={themeClass(
-                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
-                            "text-4xl sm:text-5xl lg:text-6xl font-black leading-tight italic px-6 py-4 rounded-2xl inline-block",
+                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
+                            "text-xl sm:text-2xl lg:text-3xl font-black leading-tight italic px-3 py-2 rounded-lg inline-block",
                           )}
                           style={{
                             background: isLightTheme
@@ -1079,7 +1079,7 @@ export default function App() {
                           }}
                         >
                           شمارا به زیبایی دعوت میکند
-                        </h2>
+                        </span>
                       </div>
                       <p
                         className={themeClass(
@@ -1098,8 +1098,8 @@ export default function App() {
 
                       <h3
                         className={themeClass(
-                          "text-3xl sm:text-5xl lg:text-6xl font-black text-amber-600 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-6 py-4 rounded-2xl inline-block",
-                          "text-3xl sm:text-5xl lg:text-6xl font-black text-amber-400 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-6 py-4 rounded-2xl inline-block",
+                          "text-lg sm:text-2xl lg:text-3xl font-black text-amber-600 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-3 py-2 rounded-lg inline-block",
+                          "text-lg sm:text-2xl lg:text-3xl font-black text-amber-400 italic mb-6 tracking-tight animate-fade-in-text stagger-1 px-3 py-2 rounded-lg inline-block",
                         )}
                         style={{
                           background: isLightTheme
@@ -1108,9 +1108,6 @@ export default function App() {
                         }}
                       >
                         🎁 هدیه خود را انتخاب کنید
-                        <div className="text-4xl animate-bounce-gentle mt-2">
-                          ⬇️
-                        </div>
                       </h3>
                     </div>
 
