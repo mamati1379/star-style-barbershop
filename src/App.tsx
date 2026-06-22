@@ -1076,25 +1076,10 @@ export default function App() {
                           شمارا به زیبایی دعوت میکند
                         </span>
                       </div>
-                      <p
-                        className={themeClass(
-                          "text-zinc-700 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4",
-                          "text-zinc-350 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mr-0 pl-0 lg:pl-4",
-                        )}
-                      >
-                        بارکد مجتمع تجاری استارمال را اسکن کردید؟ سالن آرایش و
-                        استایل مردانه با خدمات لوکس و مدرن در{" "}
-                        <span className="text-amber-400 font-extrabold underline decoration-amber-500/40 underline-offset-4">
-                          طبقه ششم مجتمع استارمال
-                        </span>{" "}
-                        منتظر شما است. کافی‌ست در فرم زیر ثبت‌نام کرده و بلیت
-                        VIP دیجیتال خود را بلافاصله دریافت نمایید!
-                      </p>
-
                       <h3
                         className={themeClass(
-                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1",
-                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-fade-in-text stagger-1",
+                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-intense-blink",
+                          "text-2xl sm:text-3xl lg:text-4xl font-black italic mt-8 mb-8 tracking-tight animate-intense-blink",
                         )}
                         style={{
                           color: "#ff8c00",
@@ -1188,72 +1173,84 @@ export default function App() {
                         </label>
                         <div className="space-y-3.5">
                           {GIFT_OPTIONS.map((option, idx) => (
-                            <label
+                            <div
                               key={option.id}
                               onClick={() => setSelectedGift(option.id)}
-                              className={`flex flex-col gap-2 p-5 rounded-2xl border cursor-pointer transition-all gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
+                              className={`flex flex-col items-center justify-center gap-3 p-6 rounded-3xl border-2 cursor-pointer transition-all transform hover:scale-105 gift-card-hover animate-fade-in-text stagger-${idx + 1} ${
                                 selectedGift === option.id
                                   ? themeClass(
-                                      "bg-amber-50 border-amber-400 text-zinc-900 shadow-[0_0_15px_rgba(245,158,11,0.08)]",
-                                      "bg-amber-500/[0.04] border-amber-500 text-zinc-100 shadow-[0_0_15px_rgba(245,158,11,0.05)]",
+                                      "bg-amber-100 border-amber-500 text-zinc-900 shadow-[0_0_25px_rgba(245,158,11,0.3)]",
+                                      "bg-amber-500/20 border-amber-400 text-zinc-100 shadow-[0_0_25px_rgba(245,158,11,0.2)]",
                                     )
                                   : themeClass(
-                                      "bg-zinc-50 border-zinc-200 hover:border-zinc-300 text-zinc-700",
-                                      "bg-zinc-950/40 border-zinc-800 hover:border-zinc-700 text-zinc-400",
+                                      "bg-white border-zinc-300 hover:border-amber-400 text-zinc-700",
+                                      "bg-zinc-900/60 border-zinc-700 hover:border-amber-500 text-zinc-300",
                                     )
                               }`}
                             >
-                              <div className="flex items-start gap-3.5">
-                                <div className="mt-0.5 flex items-center justify-center flex-shrink-0">
-                                  <input
-                                    type="radio"
-                                    name="gift"
-                                    checked={selectedGift === option.id}
-                                    onChange={() => setSelectedGift(option.id)}
-                                    className="accent-amber-500 w-5 h-5 cursor-pointer"
-                                  />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center gap-2">
-                                    <span
-                                      className={
-                                        selectedGift === option.id
-                                          ? "animate-sparkle"
-                                          : ""
-                                      }
-                                    >
-                                      {renderIcon(
-                                        option.iconName,
-                                        18,
-                                        selectedGift === option.id
-                                          ? isLightTheme
-                                            ? "text-amber-600"
-                                            : "text-amber-500"
-                                          : isLightTheme
-                                            ? "text-zinc-500"
-                                            : "text-zinc-500",
-                                      )}
-                                    </span>
-                                    <span
-                                      className={`text-xl sm:text-3xl font-black leading-tight ${selectedGift === option.id ? (isLightTheme ? "text-amber-700" : "text-amber-400") : isLightTheme ? "text-zinc-900" : "text-zinc-200"}`}
-                                    >
-                                      {option.title}
-                                    </span>
+                              {selectedGift === option.id ? (
+                                // Digital ticket card view when selected
+                                <div className="w-full text-center">
+                                  <div className="flex justify-center mb-3">
+                                    {renderIcon(
+                                      option.iconName,
+                                      40,
+                                      "text-amber-500",
+                                    )}
                                   </div>
+                                  <h4 className="text-2xl sm:text-3xl font-black mb-2">
+                                    {option.title}
+                                  </h4>
                                   {(option.id === "blow-dry" ||
                                     option.id === "beard-fade") && (
-                                    <span className="inline-block mt-4 px-5 py-3 bg-green-500/30 text-green-700 dark:text-green-400 text-lg sm:text-xl font-black rounded-lg border border-green-500/60">
+                                    <span className="inline-block px-4 py-2 bg-green-500/40 text-green-700 dark:text-green-400 text-lg font-black rounded-lg border border-green-500/80">
                                       {FREE_LABEL}
                                     </span>
                                   )}
                                   {option.id === "credit-99k" && (
-                                    <span className="inline-block mt-4 px-5 py-3 bg-blue-500/30 text-blue-700 dark:text-blue-400 text-lg sm:text-xl font-black rounded-lg border border-blue-500/60">
+                                    <span className="inline-block px-4 py-2 bg-blue-500/40 text-blue-700 dark:text-blue-400 text-lg font-black rounded-lg border border-blue-500/80">
+                                      برای تمامی خدمات
+                                    </span>
+                                  )}
+                                  <div className="mt-4 text-sm opacity-75">
+                                    کلیک کنید برای نمایش بلیط
+                                  </div>
+                                </div>
+                              ) : (
+                                // Compact view when not selected
+                                <div className="flex flex-col items-center text-center">
+                                  <span className="mb-2">
+                                    {renderIcon(
+                                      option.iconName,
+                                      32,
+                                      isLightTheme
+                                        ? "text-zinc-600"
+                                        : "text-zinc-400",
+                                    )}
+                                  </span>
+                                  <span
+                                    className={`text-lg sm:text-2xl font-black leading-tight ${
+                                      isLightTheme
+                                        ? "text-zinc-900"
+                                        : "text-zinc-200"
+                                    }`}
+                                  >
+                                    {option.title}
+                                  </span>
+                                  {(option.id === "blow-dry" ||
+                                    option.id === "beard-fade") && (
+                                    <span className="inline-block mt-3 px-3 py-1.5 bg-green-500/30 text-green-700 dark:text-green-400 text-sm font-black rounded border border-green-500/60">
+                                      {FREE_LABEL}
+                                    </span>
+                                  )}
+                                  {option.id === "credit-99k" && (
+                                    <span className="inline-block mt-3 px-3 py-1.5 bg-blue-500/30 text-blue-700 dark:text-blue-400 text-sm font-black rounded border border-blue-500/60">
                                       برای تمامی خدمات
                                     </span>
                                   )}
                                 </div>
-                              </div>
-                            </label>
+                              )}
+                            </div>
                           ))}
                         </div>
                       </div>

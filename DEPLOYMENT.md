@@ -2,17 +2,29 @@
 
 ## مشکل صفحه سفید - حل شد! ✅
 
-### تغییرات اعمال شده:
+### آخرین تغییرات (Fixed - June 22, 2026):
+
+1. **❌ Deleted: `.github/workflows/static.yml`**
+   - این workflow درست کار نمی‌کرد (کل repo رو upload می‌کرد بدون build)
+   - جایش رو `deploy.yml` گرفت
+
+2. **✅ src/fonts.css**
+   - تغییر: relative paths → absolute paths with base path
+   - From: `url("../fonts/IRANSansX-Regular.otf")`
+   - To: `url("/star-style-barbershop/fonts/IRANSansX-Regular.otf")`
+   - این مطمئن می‌کند فونت‌ها درست load شوند
+
+### اصلی تغییرات:
 
 1. **vite.config.ts**
    - اضافه شده: `base: "/star-style-barbershop/"`
    - این تنظیم مسیرهای assets را برای subpath درست می‌کند
 
-2. **.github/workflows/deploy.yml**
+2. **.github/workflows/deploy.yml** (تنها workflow صحیح)
    - GitHub Actions workflow برای خودکار deployment
    - هر push به main/master branch، سایت به‌روزرسانی می‌شود
 
-3. **public/404.html**
+3. **dist/404.html**
    - فایل 404 سفارشی برای routing صحیح
 
 4. **.nojekyll**
@@ -44,7 +56,7 @@ npm run preview
 
 # 2. Deploy خود را push کنید
 git add .
-git commit -m "Deploy to GitHub Pages"
+git commit -m "Fix: Remove static.yml workflow, fix font paths"
 git push origin main
 
 # 3. GitHub Actions منتظر بگیرید (2-3 دقیقه)
@@ -62,16 +74,23 @@ dist/
 ├── assets/
 │   ├── index-*.js      # JavaScript bundled
 │   └── index-*.css     # CSS bundled
+├── fonts/              # تمام فایل‌های فونت کپی شده
+│   ├── IRANSansX-Regular.otf
+│   ├── IRANSansX-Bold.ttf
+│   └── ... (22 فایل دیگر)
+├── 404.html            # Custom 404 redirect page
 ├── server.cjs          # Backend server (اختیاری)
 └── server.cjs.map      # Source map
 ```
 
 ## ✨ تنظیمات نهایی
 
-- ✅ Base path درست شد
-- ✅ GitHub Actions workflow آماده است
+- ✅ Base path درست شد (`/star-style-barbershop/`)
+- ✅ GitHub Actions workflow آماده است (فقط `deploy.yml`)
 - ✅ 404 page برای routing مجهز شد
 - ✅ Assets paths خودکار تنظیم می‌شود
+- ✅ Font CSS paths تصحیح شد (absolute paths)
+- ✅ Conflicting workflow removed (`static.yml` حذف شد)
 
 ## 🎯 نتیجه
 
@@ -82,7 +101,25 @@ https://mamati1379.github.io/star-style-barbershop/
 
 ---
 
-اگر مشکل هنوز باقی است، لطفا:
-1. Browser developer tools (F12) بازکنید
-2. Console tab رو بررسی کنید برای errors
-3. Network tab رو بررسی کنید تا ببینید assets load می‌شوند
+## 🐛 Troubleshooting
+
+اگر صفحه هنوز سفید است:
+
+1. **Hard refresh کنید**: `Cmd+Shift+R` (macOS) یا `Ctrl+Shift+R` (Windows)
+   - GitHub Pages caching می‌تواند مشکل ایجاد کند
+
+2. **Browser console بررسی کنید** (F12):
+   - Network tab: assets و fonts load می‌شوند؟
+   - Console: JavaScript errors?
+   - نگاه کن برای: 404 Not Found errors
+
+3. **GitHub Actions بررسی کنید**:
+   - https://github.com/mamati1379/star-style-barbershop/actions
+   - آخرین workflow "Deploy to GitHub Pages" successful بود؟
+   - Logs میں کوئی error نہیں؟
+
+4. **Repository Settings verify کنید**:
+   - Settings → Pages
+   - Source: "Deploy from a branch"
+   - Branch: `gh-pages`
+   - Folder: `/ (root)`
