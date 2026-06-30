@@ -1,10 +1,9 @@
 /* IRANSansX Font Family - Custom Web Fonts */
-/* Uses absolute paths relative to the base path (/star-style-barbershop/) */
 
 /* Thin - Weight 100 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-Thin.otf")
+    src: url("/fonts/IRANSansX-Thin.otf")
         format("opentype");
     font-weight: 100;
     font-style: normal;
@@ -14,7 +13,7 @@
 /* Ultra Light - Weight 200 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-UltraLight.ttf")
+    src: url("/fonts/IRANSansX-UltraLight.ttf")
         format("truetype");
     font-weight: 200;
     font-style: normal;
@@ -24,7 +23,7 @@
 /* Light - Weight 300 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-Light.ttf")
+    src: url("/fonts/IRANSansX-Light.ttf")
         format("truetype");
     font-weight: 300;
     font-style: normal;
@@ -34,7 +33,7 @@
 /* Regular - Weight 400 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-Regular.otf")
+    src: url("/fonts/IRANSansX-Regular.otf")
         format("opentype");
     font-weight: 400;
     font-style: normal;
@@ -44,7 +43,7 @@
 /* Medium - Weight 500 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-Medium.otf")
+    src: url("/fonts/IRANSansX-Medium.otf")
         format("opentype");
     font-weight: 500;
     font-style: normal;
@@ -54,7 +53,7 @@
 /* DemiBold - Weight 600 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-DemiBold.ttf")
+    src: url("/fonts/IRANSansX-DemiBold.ttf")
         format("truetype");
     font-weight: 600;
     font-style: normal;
@@ -64,7 +63,7 @@
 /* Bold - Weight 700 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-Bold.ttf")
+    src: url("/fonts/IRANSansX-Bold.ttf")
         format("truetype");
     font-weight: 700;
     font-style: normal;
@@ -74,7 +73,7 @@
 /* Extra Bold - Weight 800 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-ExtraBold.otf")
+    src: url("/fonts/IRANSansX-ExtraBold.otf")
         format("opentype");
     font-weight: 800;
     font-style: normal;
@@ -84,7 +83,7 @@
 /* Black - Weight 900 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-Black.otf")
+    src: url("/fonts/IRANSansX-Black.otf")
         format("opentype");
     font-weight: 900;
     font-style: normal;
@@ -94,7 +93,7 @@
 /* Heavy - Weight 900 */
 @font-face {
     font-family: "IRANSansX";
-    src: url("/star-style-barbershop/fonts/IRANSansX-Heavy.otf")
+    src: url("/fonts/IRANSansX-Heavy.otf")
         format("opentype");
     font-weight: 900;
     font-style: normal;
@@ -105,7 +104,7 @@
 /* Semi Bold - Weight 600 */
 @font-face {
     font-family: "Morabba";
-    src: url("/star-style-barbershop/fonts/Morabba-SemiBold.ttf")
+    src: url("/fonts/Morabba-SemiBold.ttf")
         format("truetype");
     font-weight: 600;
     font-style: normal;
@@ -116,7 +115,7 @@
 /* Regular - Weight 400 */
 @font-face {
     font-family: "Hamrah";
-    src: url("/star-style-barbershop/fonts/Hamrah.ttf") format("truetype");
+    src: url("/fonts/Hamrah.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;

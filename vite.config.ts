@@ -33,7 +33,7 @@ function copyFontsPlugin(): Plugin {
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss(), copyFontsPlugin()],
-    base: "/star-style-barbershop/",
+    base: "/",
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "."),
