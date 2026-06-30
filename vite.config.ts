@@ -30,10 +30,14 @@ function copyFontsPlugin(): Plugin {
   };
 }
 
-export default defineConfig(() => {
+export default defineConfig(({ command }) => {
+  // Use different base paths for dev and production
+  const isDev = command === "serve";
+  const base = isDev ? "/" : "/star-style-barbershop/";
+
   return {
     plugins: [react(), tailwindcss(), copyFontsPlugin()],
-    base: "/star-style-barbershop/",
+    base: base,
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "."),
