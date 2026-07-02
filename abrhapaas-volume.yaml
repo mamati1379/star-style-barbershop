@@ -1,0 +1,29 @@
+# Persistent Volume Claim برای پوشه data/
+# این فایل را در پنل abrhapaas یا با oc CLI اعمال کن
+#
+# دستور:
+#   oc apply -f abrhapaas-volume.yaml
+#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: barbershop-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+---
+# بعد از ساخت PVC، در تنظیمات Deployment پوشه data/ را mount کن:
+#
+# spec:
+#   containers:
+#     - name: app
+#       volumeMounts:
+#         - name: data-volume
+#           mountPath: /app/data
+#   volumes:
+#     - name: data-volume
+#       persistentVolumeClaim:
+#         claimName: barbershop-data-pvc
