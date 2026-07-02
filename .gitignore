@@ -6,3 +6,9 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# SQLite database files (runtime data - never commit)
+data/clients.db
+data/clients.db-shm
+data/clients.db-wal
+data/backups/
