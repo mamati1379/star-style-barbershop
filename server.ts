@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import { createHash } from "crypto";
 import Database from "better-sqlite3";
 import rateLimit from "express-rate-limit";
 import { createServer as createViteServer } from "vite";
@@ -15,15 +14,6 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = process.env.HOST || "0.0.0.0";
 const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Farhad2020";
 const VALID_GIFTS = new Set(["blow-dry", "beard-fade", "credit-99k"]);
-
-// ---------------------------------------------------------------------------
-// Security: derive a stable session token from the admin password.
-// The plaintext password is NEVER returned in any API response.
-// Client stores this token in localStorage and sends it as x-admin-password.
-// ---------------------------------------------------------------------------
-const ADMIN_TOKEN = createHash("sha256")
-  .update(DEFAULT_ADMIN_PASSWORD + ":star-style-admin")
-  .digest("hex");
 
 app.use(express.json());
 
@@ -264,16 +254,14 @@ const adminActionLimiter = rateLimit({
 
 // ---------------------------------------------------------------------------
 // Admin Authorization Middleware
-// Only accepts token via header — query string intentionally removed
-// ---------------------------------------------------------------------------
-
+// Only accepts password via header — query string intentionally removed
 const authorizeAdmin = (
   req: express.Request,
   res: express.Response,
   next: express.NextFunction,
 ) => {
   const token = req.headers["x-admin-password"] as string | undefined;
-  if (token && token === ADMIN_TOKEN) {
+  if (token && token === DEFAULT_ADMIN_PASSWORD) {
     next();
   } else {
     res.status(403).json({ error: "عدم دسترسی مجاز" });
@@ -285,7 +273,6 @@ const authorizeAdmin = (
 // ---------------------------------------------------------------------------
 
 // Admin Login
-// Security: returns ADMIN_TOKEN (hash), NOT the plaintext password
 app.post("/api/admin/login", loginLimiter, requireBody, (req, res) => {
   const { password } = req.body;
   if (typeof password !== "string" || !password) {
@@ -294,7 +281,7 @@ app.post("/api/admin/login", loginLimiter, requireBody, (req, res) => {
       .json({ success: false, error: "رمز عبور الزامی است." });
   }
   if (password === DEFAULT_ADMIN_PASSWORD) {
-    res.json({ success: true, token: ADMIN_TOKEN });
+    res.json({ success: true, token: DEFAULT_ADMIN_PASSWORD });
   } else {
     res
       .status(401)
