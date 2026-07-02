@@ -1,7 +1,9 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import { createHash } from "crypto";
 import Database from "better-sqlite3";
+import rateLimit from "express-rate-limit";
 import { createServer as createViteServer } from "vite";
 import dotenv from "dotenv";
 
@@ -13,6 +15,15 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = process.env.HOST || "0.0.0.0";
 const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Farhad2020";
 const VALID_GIFTS = new Set(["blow-dry", "beard-fade", "credit-99k"]);
+
+// ---------------------------------------------------------------------------
+// Security: derive a stable session token from the admin password.
+// The plaintext password is NEVER returned in any API response.
+// Client stores this token in localStorage and sends it as x-admin-password.
+// ---------------------------------------------------------------------------
+const ADMIN_TOKEN = createHash("sha256")
+  .update(DEFAULT_ADMIN_PASSWORD + ":star-style-admin")
+  .digest("hex");
 
 app.use(express.json());
 
@@ -82,7 +93,7 @@ db.exec(`
       );
     }
   } catch (err) {
-    console.error("JSON migration error (non-fatal):", err);
+    console.error("JSON migration error (non-fatal):", (err as Error).message);
   }
 })();
 
@@ -102,7 +113,7 @@ interface Client {
 }
 
 // ---------------------------------------------------------------------------
-// DB helpers
+// DB helpers — all use Prepared Statements (no SQL injection risk)
 // ---------------------------------------------------------------------------
 
 const stmtGetAll = db.prepare<[], Client>(
@@ -134,11 +145,9 @@ const stmtFindById = db.prepare<[string], Client>(
 
 // ---------------------------------------------------------------------------
 // Atomic registration transaction
-// Prevents duplicate mobile AND duplicate tracking code under concurrency.
 // ---------------------------------------------------------------------------
 
 const registerTransaction = db.transaction((newClient: Client) => {
-  // Double-check inside the transaction (UNIQUE constraint is the final guard)
   const dup = stmtFindByMobile.get(newClient.normalizedMobile);
   if (dup)
     throw Object.assign(new Error("DUPLICATE_MOBILE"), {
@@ -150,7 +159,7 @@ const registerTransaction = db.transaction((newClient: Client) => {
 });
 
 // ---------------------------------------------------------------------------
-// Utility functions (unchanged from original)
+// Utility functions
 // ---------------------------------------------------------------------------
 
 function persianToEnglishDigits(str: string): string {
@@ -204,7 +213,6 @@ function generateTrackingCode(): string {
   return `ST-${randomNum}`;
 }
 
-/** Generates a tracking code guaranteed to be unique in the DB. */
 function generateUniqueTrackingCode(): string {
   let code: string;
   let attempts = 0;
@@ -217,14 +225,76 @@ function generateUniqueTrackingCode(): string {
 }
 
 // ---------------------------------------------------------------------------
-// Express API Routes  (paths and responses are IDENTICAL to original)
+// Middleware: Body Guard
+// Prevents crash when req.body is missing or non-object
+// ---------------------------------------------------------------------------
+
+function requireBody(
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) {
+  if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+    return res.status(400).json({ error: "درخواست نامعتبر است." });
+  }
+  next();
+}
+
+// ---------------------------------------------------------------------------
+// Rate Limiters
+// ---------------------------------------------------------------------------
+
+const loginLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute window
+  limit: 5,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: {
+    error: "تعداد تلاش‌های ورود بیش از حد مجاز است. یک دقیقه صبر کنید.",
+  },
+});
+
+const adminActionLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: 30, // generous for admin updating multiple clients
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: { error: "تعداد درخواست‌ها بیش از حد مجاز است. یک دقیقه صبر کنید." },
+});
+
+// ---------------------------------------------------------------------------
+// Admin Authorization Middleware
+// Only accepts token via header — query string intentionally removed
+// ---------------------------------------------------------------------------
+
+const authorizeAdmin = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  const token = req.headers["x-admin-password"] as string | undefined;
+  if (token && token === ADMIN_TOKEN) {
+    next();
+  } else {
+    res.status(403).json({ error: "عدم دسترسی مجاز" });
+  }
+};
+
+// ---------------------------------------------------------------------------
+// Express API Routes
 // ---------------------------------------------------------------------------
 
 // Admin Login
-app.post("/api/admin/login", (req, res) => {
+// Security: returns ADMIN_TOKEN (hash), NOT the plaintext password
+app.post("/api/admin/login", loginLimiter, requireBody, (req, res) => {
   const { password } = req.body;
+  if (typeof password !== "string" || !password) {
+    return res
+      .status(400)
+      .json({ success: false, error: "رمز عبور الزامی است." });
+  }
   if (password === DEFAULT_ADMIN_PASSWORD) {
-    res.json({ success: true, token: DEFAULT_ADMIN_PASSWORD });
+    res.json({ success: true, token: ADMIN_TOKEN });
   } else {
     res
       .status(401)
@@ -232,32 +302,28 @@ app.post("/api/admin/login", (req, res) => {
   }
 });
 
-// Admin Authorization Middleware
-const authorizeAdmin = (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction,
-) => {
-  const token =
-    (req.headers["x-admin-password"] as string) ||
-    (req.query.password as string);
-  if (token === DEFAULT_ADMIN_PASSWORD) {
-    next();
-  } else {
-    res.status(403).json({ error: "عدم دسترسی مجاز" });
-  }
-};
-
 // Customer Registration
-app.post("/api/register", (req, res) => {
+app.post("/api/register", requireBody, (req, res) => {
   const { fullName, mobile, gift } = req.body;
 
-  if (!fullName || !fullName.trim()) {
+  // --- fullName validation ---
+  if (!fullName || typeof fullName !== "string" || !fullName.trim()) {
     return res
       .status(400)
       .json({ error: "لطفاً نام و نام خانوادگی خود را وارد کنید" });
   }
-  if (!mobile || !mobile.trim()) {
+  const trimmedName = fullName.trim();
+  if (trimmedName.length < 2) {
+    return res.status(400).json({ error: "نام باید حداقل ۲ کاراکتر باشد" });
+  }
+  if (trimmedName.length > 100) {
+    return res
+      .status(400)
+      .json({ error: "نام نمی‌تواند بیشتر از ۱۰۰ کاراکتر باشد" });
+  }
+
+  // --- mobile validation ---
+  if (!mobile || typeof mobile !== "string" || !mobile.trim()) {
     return res
       .status(400)
       .json({ error: "لطفاً شماره موبایل خود را وارد کنید" });
@@ -267,7 +333,9 @@ app.post("/api/register", (req, res) => {
       error: "فرمت شماره موبایل نامعتبر است. نمونه صحیح: 09123456789",
     });
   }
-  if (!VALID_GIFTS.has(gift)) {
+
+  // --- gift validation ---
+  if (!gift || typeof gift !== "string" || !VALID_GIFTS.has(gift)) {
     return res.status(400).json({ error: "هدیه انتخابی نامعتبر است" });
   }
 
@@ -284,7 +352,7 @@ app.post("/api/register", (req, res) => {
 
   const newClient: Client = {
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-    fullName: fullName.trim(),
+    fullName: trimmedName,
     mobile: mobile.trim(),
     normalizedMobile: normalized,
     gift,
@@ -303,7 +371,6 @@ app.post("/api/register", (req, res) => {
         .status(400)
         .json({ error: "این شماره موبایل قبلاً ثبت شده است." });
     }
-    // SQLite UNIQUE constraint violation (belt-and-suspenders)
     const msg = (err as Error).message ?? "";
     if (msg.includes("clients.normalizedMobile")) {
       return res
@@ -315,38 +382,80 @@ app.post("/api/register", (req, res) => {
         .status(500)
         .json({ error: "خطای داخلی سرور. لطفاً دوباره تلاش کنید." });
     }
-    console.error("Registration error:", err);
+    console.error("Registration error:", (err as Error).message);
     res.status(500).json({ error: "خطای داخلی سرور. لطفاً دوباره تلاش کنید." });
   }
 });
 
 // Get Clients List (Admin)
 app.get("/api/clients", authorizeAdmin, (req, res) => {
-  const clients = stmtGetAll.all();
-  res.json({ success: true, clients });
+  try {
+    const clients = stmtGetAll.all();
+    res.json({ success: true, clients });
+  } catch (err) {
+    console.error("Fetch clients error:", (err as Error).message);
+    res.status(500).json({ error: "خطای داخلی سرور." });
+  }
 });
 
 // Update Status (Admin)
-app.post("/api/clients/:id/status", authorizeAdmin, (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
+app.post(
+  "/api/clients/:id/status",
+  adminActionLimiter,
+  authorizeAdmin,
+  requireBody,
+  (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
 
-  if (!["registered", "visited", "reward-claimed"].includes(status)) {
-    return res.status(400).json({ error: "وضعیت انتخابی نامعتبر است" });
-  }
+    if (!["registered", "visited", "reward-claimed"].includes(status)) {
+      return res.status(400).json({ error: "وضعیت انتخابی نامعتبر است" });
+    }
 
-  const client = stmtFindById.get(id);
-  if (!client) {
-    return res.status(404).json({ error: "کاربر یافت نشد" });
-  }
+    try {
+      const client = stmtFindById.get(id);
+      if (!client) {
+        return res.status(404).json({ error: "کاربر یافت نشد" });
+      }
+      stmtUpdateStatus.run({ status, id });
+      res.json({ success: true, client: { ...client, status } });
+    } catch (err) {
+      console.error("Update status error:", (err as Error).message);
+      res.status(500).json({ error: "خطای داخلی سرور." });
+    }
+  },
+);
 
-  stmtUpdateStatus.run({ status, id });
-  res.json({ success: true, client: { ...client, status } });
+// ---------------------------------------------------------------------------
+// Global Express error handler — catches any unhandled throw in routes
+// ---------------------------------------------------------------------------
+
+app.use(
+  (
+    err: Error,
+    _req: express.Request,
+    res: express.Response,
+    _next: express.NextFunction,
+  ) => {
+    console.error("Unhandled route error:", err.message);
+    res.status(500).json({ error: "خطای داخلی سرور." });
+  },
+);
+
+// ---------------------------------------------------------------------------
+// Process-level exception handlers — prevent Node from crashing
+// ---------------------------------------------------------------------------
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught exception:", err.message);
 });
 
-// ---------------------------------------------------------------------------
-// Frontend serving (unchanged)
-// ---------------------------------------------------------------------------
+process.on("unhandledRejection", (reason) => {
+  console.error(
+    "Unhandled rejection:",
+    reason instanceof Error ? reason.message : String(reason),
+  );
+});
 
 // ---------------------------------------------------------------------------
 // Daily Backup
@@ -361,13 +470,12 @@ async function runBackup() {
       fs.mkdirSync(BACKUP_DIR, { recursive: true });
     }
 
-    const date = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const date = new Date().toISOString().slice(0, 10);
     const dest = path.join(BACKUP_DIR, `clients-${date}.db`);
 
     await db.backup(dest);
     console.log(`✓ Backup saved: ${dest}`);
 
-    // Remove backups older than BACKUP_RETAIN_DAYS
     const files = fs
       .readdirSync(BACKUP_DIR)
       .filter((f) => f.startsWith("clients-") && f.endsWith(".db"))
@@ -382,9 +490,13 @@ async function runBackup() {
       console.log(`✓ Old backup removed: ${f}`);
     }
   } catch (err) {
-    console.error("Backup failed (non-fatal):", err);
+    console.error("Backup failed (non-fatal):", (err as Error).message);
   }
 }
+
+// ---------------------------------------------------------------------------
+// Frontend serving
+// ---------------------------------------------------------------------------
 
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
@@ -396,7 +508,7 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
-    app.get("*", (req, res) => {
+    app.get("*", (_req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });
   }
@@ -404,7 +516,6 @@ async function startServer() {
   app.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
 
-    // Run first backup after 1 min (let server settle), then every 24h
     setTimeout(() => {
       runBackup();
       setInterval(runBackup, 24 * 60 * 60 * 1000);
