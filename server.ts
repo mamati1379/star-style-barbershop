@@ -348,6 +348,44 @@ app.post("/api/clients/:id/status", authorizeAdmin, (req, res) => {
 // Frontend serving (unchanged)
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Daily Backup
+// ---------------------------------------------------------------------------
+
+const BACKUP_DIR = path.join(DATA_DIR, "backups");
+const BACKUP_RETAIN_DAYS = 7;
+
+async function runBackup() {
+  try {
+    if (!fs.existsSync(BACKUP_DIR)) {
+      fs.mkdirSync(BACKUP_DIR, { recursive: true });
+    }
+
+    const date = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const dest = path.join(BACKUP_DIR, `clients-${date}.db`);
+
+    await db.backup(dest);
+    console.log(`✓ Backup saved: ${dest}`);
+
+    // Remove backups older than BACKUP_RETAIN_DAYS
+    const files = fs
+      .readdirSync(BACKUP_DIR)
+      .filter((f) => f.startsWith("clients-") && f.endsWith(".db"))
+      .sort();
+
+    const toDelete = files.slice(
+      0,
+      Math.max(0, files.length - BACKUP_RETAIN_DAYS),
+    );
+    for (const f of toDelete) {
+      fs.unlinkSync(path.join(BACKUP_DIR, f));
+      console.log(`✓ Old backup removed: ${f}`);
+    }
+  } catch (err) {
+    console.error("Backup failed (non-fatal):", err);
+  }
+}
+
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -365,6 +403,12 @@ async function startServer() {
 
   app.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
+
+    // Run first backup after 1 min (let server settle), then every 24h
+    setTimeout(() => {
+      runBackup();
+      setInterval(runBackup, 24 * 60 * 60 * 1000);
+    }, 60 * 1000);
   });
 }
 
