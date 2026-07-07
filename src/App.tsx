@@ -26,6 +26,7 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { GIFT_OPTIONS, STATUS_LABELS, FREE_LABEL } from "./types";
 import { formatJalali, toPersianDigits } from "./utils/jalali";
+import HeroIntro from "./components/HeroIntro";
 
 interface Client {
   id: string;
@@ -420,6 +421,7 @@ export default function App() {
       </header>
 
       {/* Main Content View with Animation Transitions */}
+      <HeroIntro isLightTheme={isLightTheme} />
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-10 z-10 flex flex-col justify-center">
         {/* VIEW 1: ADMIN MODE */}
         {isAdminMode ? (
