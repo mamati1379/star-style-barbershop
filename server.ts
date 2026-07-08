@@ -214,6 +214,143 @@ function generateUniqueTrackingCode(): string {
   return code;
 }
 
+function getTodayDate(): string {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function gregorianToJalali(date: Date): string {
+  const gy = date.getFullYear();
+  const gm = date.getMonth() + 1;
+  const gd = date.getDate();
+
+  const g_d_m = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  let jy = gy <= 1600 ? 0 : 979;
+  const gy2 = gy <= 1600 ? gy - 621 : gy - 1600;
+
+  let g_day_no = gd - 1;
+  for (let i = 0; i < gm - 1; i++) g_day_no += g_d_m[i + 1];
+
+  if ((gy2 % 4 === 0 && gy2 % 100 !== 0) || gy2 % 400 === 0) g_day_no++;
+
+  let j_day_no =
+    365 * gy2 +
+    Math.floor((gy2 + 1) / 4) -
+    Math.floor((gy2 + 1) / 100) +
+    Math.floor((gy2 + 1) / 400) +
+    g_day_no -
+    79;
+
+  const j_np = Math.floor(j_day_no / 12053);
+  jy += 33 * j_np;
+  j_day_no %= 12053;
+
+  jy += Math.floor((j_day_no - 1) / 365);
+  j_day_no = (j_day_no - 1) % 365;
+
+  let jm: number;
+  let jd: number;
+  if (j_day_no < 186) {
+    jm = Math.floor(j_day_no / 31) + 1;
+    jd = (j_day_no % 31) + 1;
+  } else {
+    jm = Math.floor((j_day_no - 186) / 30) + 7;
+    jd = ((j_day_no - 186) % 30) + 1;
+  }
+
+  return `${jy}/${String(jm).padStart(2, "0")}/${String(jd).padStart(2, "0")}`;
+}
+
+const TELEGRAM_BOT_TOKEN = "8962107527:AAH_bHkYo8v6FC8qf8HQYoUOX0K9aD9VkBI";
+const TELEGRAM_CHAT_ID = "-5486492040";
+
+async function sendTelegramNotification(client: Client): Promise<void> {
+  try {
+    const created = new Date(client.createdAt);
+
+    const totalRow = (
+      db.prepare<[], { "COUNT(*)": number }>("SELECT COUNT(*) FROM clients")
+    ).get();
+    const totalClients = totalRow ? totalRow["COUNT(*)"] : 0;
+
+    const todayRow = (
+      db.prepare<[string], { "COUNT(*)": number }>(
+        "SELECT COUNT(*) FROM clients WHERE substr(createdAt, 1, 10) = ?",
+      )
+    ).get(getTodayDate());
+    const todayClients = todayRow ? todayRow["COUNT(*)"] : 0;
+
+    const jalaliDate = gregorianToJalali(created);
+    const time = created.toLocaleTimeString("fa-IR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    const message = `🎉 ثبت‌نام جدید در STAR STYLE VIP
+
+━━━━━━━━━━━━━━━━━━
+
+👤 نام:
+${client.fullName}
+
+📱 موبایل:
+${client.mobile}
+
+🎁 هدیه:
+${client.gift}
+
+🎟 کد رهگیری:
+${client.trackingCode}
+
+🗓 تاریخ:
+${jalaliDate}
+
+🕒 ساعت:
+${time}
+
+━━━━━━━━━━━━━━━━━━
+
+📊 آمار سیستم
+
+👥 کل ثبت‌نام‌ها:
+${totalClients}
+
+📅 ثبت‌نام‌های امروز:
+${todayClients}
+
+━━━━━━━━━━━━━━━━━━
+
+✅ ثبت‌نام با موفقیت انجام شد.`;
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+      }),
+    });
+
+    if (!res.ok) {
+      console.warn(
+        `Telegram notification failed (non-fatal): ${res.status} ${res.statusText}`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      "Telegram notification error (non-fatal):",
+      err instanceof Error ? err.message : String(err),
+    );
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Middleware: Body Guard
 // Prevents crash when req.body is missing or non-object
@@ -290,7 +427,7 @@ app.post("/api/admin/login", loginLimiter, requireBody, (req, res) => {
 });
 
 // Customer Registration
-app.post("/api/register", requireBody, (req, res) => {
+app.post("/api/register", requireBody, async (req, res) => {
   const { fullName, mobile, gift } = req.body;
 
   // --- fullName validation ---
@@ -350,6 +487,7 @@ app.post("/api/register", requireBody, (req, res) => {
 
   try {
     registerTransaction(newClient);
+    await sendTelegramNotification(newClient);
     res.json({ success: true, client: newClient });
   } catch (err: unknown) {
     const code = (err as { code?: string }).code;
